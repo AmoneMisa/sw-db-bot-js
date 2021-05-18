@@ -1,8 +1,9 @@
 const bot = require('../bot');
 const updateFilter = require('../monsters/functions/updateFilter');
+const dictionary = require('../dictionaries/mainDictionary');
 
 module.exports = [["monsters.filter.type.awaken", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, "Уровень пробуждения монстра", {
+    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.awaken}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "Awaken",

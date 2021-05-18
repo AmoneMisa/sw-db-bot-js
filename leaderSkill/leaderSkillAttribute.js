@@ -1,12 +1,13 @@
 const bot = require('../bot');
 const updateFilter = require('../monsters/functions/updateFilter');
+const dictionary = require('../dictionaries/mainDictionary');
 
 module.exports = [["monsters.filter.type.leader_skill.attribute", function (session, callback) {
     let buildKeyboard = (leaderSkills) => leaderSkills.map(leaderSkill => ({
         text: leaderSkill, callback_data: `monsters.filter.type.leader_skill.attribute.${leaderSkill.toLowerCase()}`
     }));
 
-    bot.sendMessage(callback.message.chat.id, "Выберите аттрибут", {
+    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.leaderSkill.attribute}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["Attack", "Defense", "Hp"]),

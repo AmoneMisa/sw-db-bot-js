@@ -11,18 +11,18 @@ function forEach(obj, dictionary) {
     return string;
 }
 
-function buildSkillsString(skills) {
+function buildSkillsString(skills, lang) {
     let string = "";
-    let skillEffectsString = "\n-Скилл эффекты-";
-    let effectString = "\n-Эффект-";
+    let skillEffectsString = lang === "ru" ? "\n-Скилл эффекты-" : "\n- Skill effects -";
+    let effectString = lang === "ru" ? "\n-Эффект-" : "\n-Effect-";
     for (let skill of skills) {
-        string += forEach(skill, dictionary.skillsDictionary);
+        string += forEach(skill, dictionary[lang].skillsDictionary);
         if (skill.effects && skill.effects.length) {
             for (let skillEffect of skill.effects) {
-                skillEffectsString += forEach(skillEffect, dictionary.skillEffectsDictionary);
+                skillEffectsString += forEach(skillEffect, dictionary[lang].skillEffectsDictionary);
                 string += skillEffectsString;
                 if (skillEffect.effect) {
-                    effectString += forEach(skillEffect.effect, dictionary.effectDictionary);
+                    effectString += forEach(skillEffect.effect, dictionary[lang].effectDictionary);
                     string += effectString;
                 }
             }
@@ -33,16 +33,16 @@ function buildSkillsString(skills) {
 
 module.exports = function (filter, lang) {
     let string = "";
-    let skillsString = "\n- Скиллы -";
-    let leaderSkillString = "\n- Лидерка -";
+    let skillsString = lang === "ru" ? "\n- Скиллы -" : "\n- Skills -";
+    let leaderSkillString = lang === "ru" ? "\n- Лидерка -" : "\n- Leader skill -";
 
     for (let key of Object.keys(filter)) {
         if (key === "skills") {
-            skillsString += buildSkillsString(filter.skills);
+            skillsString += buildSkillsString(filter.skills, lang);
         } else if (key === "leaderSkill") {
             leaderSkillString += forEach(filter.leaderSkill, dictionary[lang].leaderSkillDictionary);
         } else {
-            string += `\n${dictionary[lang][key]}: ${filter[key]}`;
+            string += `\n${dictionary[lang].dictionary[key]}: ${filter[key]}`;
         }
     }
 

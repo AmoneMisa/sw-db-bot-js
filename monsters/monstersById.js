@@ -4,7 +4,7 @@ const formatMonster = require('./functions/formatMonster');
 const dictionary = require('../dictionaries/mainDictionary');
 
 module.exports = [["monsters.by_id", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters_by_id}`, {
+    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monstersById}`, {
         reply_markup: {
             force_reply: true
         }

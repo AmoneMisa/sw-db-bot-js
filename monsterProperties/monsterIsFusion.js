@@ -1,12 +1,13 @@
 const bot = require('../bot');
 const updateFilter = require('../monsters/functions/updateFilter');
+const dictionary = require('../dictionaries/mainDictionary');
 
 module.exports = [
     ["monsters.filter.type.is_fusion_food", function (session, callback) {
         let buildKeyboard = (stats) => stats.map(stat => ({
             text: stat, callback_data: `monsters.filter.type.is_fusion_food.${stat.toLowerCase()}`
         }));
-        bot.sendMessage(callback.message.chat.id, "Является ли мобом для гекса", {
+        bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.fusion}`, {
             reply_markup: {
                 inline_keyboard: [
                     buildKeyboard(["Yes"]),

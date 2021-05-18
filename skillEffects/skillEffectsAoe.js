@@ -1,8 +1,9 @@
 const bot = require('../bot');
 const updateFilter = require('../monsters/functions/updateFilter');
+const dictionary = require('../dictionaries/mainDictionary');
 
 module.exports = [["monsters.filter.type.skills.effects.aoe", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, "Массовый или одиночный", {
+    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.skillEffect.aoe}`, {
         reply_markup: {
             inline_keyboard: [
                 [{

@@ -1,12 +1,14 @@
 const bot = require('../bot');
 const updateFilter = require('../monsters/functions/updateFilter');
+const dictionary = require('../dictionaries/mainDictionary');
+
 
 module.exports = [["monsters.filter.type.skills.hits", function (session, callback) {
     let buildKeyboard = (skills) => skills.map(skill => ({
         text: skill, callback_data: `monsters.filter.type.skills.hits.${skill.toLowerCase()}`
     }));
 
-    bot.sendMessage(callback.message.chat.id, "Выберите количество ударов", {
+    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.skills.hits}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["0", "1", "2"]),

@@ -1,12 +1,13 @@
 const bot = require('../bot');
 const updateFilter = require('../monsters/functions/updateFilter');
+const dictionary = require('../dictionaries/mainDictionary');
 
 module.exports = [["monsters.filter.type.skills.effects.chance", function (session, callback) {
     let buildKeyboard = (skills) => skills.map(skill => ({
         text: skill, callback_data: `monsters.filter.type.skills.effects.chance.${skill.toLowerCase()}`
     }));
 
-    bot.sendMessage(callback.message.chat.id, "Шанс наложения эффекта", {
+    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.skillEffect.chance}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["0", "325", "165", "100"]),

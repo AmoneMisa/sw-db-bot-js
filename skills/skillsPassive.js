@@ -1,12 +1,13 @@
 const bot = require('../bot');
 const updateFilter = require('../monsters/functions/updateFilter');
+const dictionary = require('../dictionaries/mainDictionary');
 
 module.exports = [ ["monsters.filter.type.skills.passive", function (session, callback) {
     let buildKeyboard = (skills) => skills.map(skill => ({
         text: skill, callback_data: `monsters.filter.type.skills.passive.${skill.toLowerCase()}`
     }));
 
-    bot.sendMessage(callback.message.chat.id, "Пассивный или активный", {
+    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.skills.passive}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["Passive"]),

@@ -1,8 +1,9 @@
 const bot = require('../bot');
 const updateFilter = require('../monsters/functions/updateFilter');
+const dictionary = require('../dictionaries/mainDictionary');
 
 module.exports = [["monsters.filter.type.stats.accuracy", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, "Выберите значение.", {
+    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.stats.accuracy}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "0",

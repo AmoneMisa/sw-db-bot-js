@@ -1,8 +1,9 @@
 const bot = require('../bot');
 const updateFilter = require('../monsters/functions/updateFilter');
+const dictionary = require('../dictionaries/mainDictionary');
 
 module.exports = [["monsters.filter.type.stats.hp", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, "Выберите тип значения.", {
+    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.stats.hp.filter}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "Greater than",
@@ -15,7 +16,7 @@ module.exports = [["monsters.filter.type.stats.hp", function (session, callback)
     });
     bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
 }], ["monsters.filter.type.stats.hp.gte", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, "Искать значение больше, чем", {
+    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.stats.hp.gte}`, {
         reply_markup: {
             force_reply: true
         }
@@ -30,7 +31,7 @@ module.exports = [["monsters.filter.type.stats.hp", function (session, callback)
         });
     });
 }], ["monsters.filter.type.stats.hp.lte", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, "Искать значение меньше, чем", {
+    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.stats.hp.lte}`, {
         reply_markup: {
             force_reply: true
         }

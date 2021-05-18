@@ -3,7 +3,7 @@ const bot = require('../../bot');
 const dictionary = require('../../dictionaries/mainDictionary');
 
 module.exports = function (session, callback) {
-    let text = `${dictionary[session.language].update_filter} ${formatFilterString(session.filter, session.language)}`;
+    let text = `${dictionary[session.language].updateFilter} ${formatFilterString(session.filter, session.language)}`;
 
     if (session.info_message) {
         bot.editMessageText(text, {

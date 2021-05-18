@@ -1,4 +1,5 @@
 const bot = require('../bot');
+const dictionary = require('../dictionaries/mainDictionary');
 
 module.exports = [
     ["monsters.filter.type.skills.effects.effect", function (session, callback) {
@@ -6,7 +7,7 @@ module.exports = [
             text: effect, callback_data: `monsters.filter.type.skills.effects.effect.${effect.toLowerCase()}`
         }));
 
-        bot.sendMessage(callback.message.chat.id, "Выберите свойства эффекта", {
+        bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.effect.filter}`, {
             reply_markup: {
                 inline_keyboard: [
                     buildKeyboard(["Name"]),

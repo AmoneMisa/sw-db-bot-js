@@ -1,8 +1,9 @@
 const bot = require('../bot');
 const updateFilter = require('../monsters/functions/updateFilter');
+const dictionary = require('../dictionaries/mainDictionary');
 
 module.exports = [["monsters.filter.type.base_stars", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, "Выберите фильтрацию редкости моба. ", {
+    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.stars.message}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "Greater than",
@@ -18,9 +19,7 @@ module.exports = [["monsters.filter.type.base_stars", function (session, callbac
     let buildKeyboard = (stars) => stars.map(star => ({
         text: star, callback_data: `monsters.filter.type.base_stars.gte.${star.toLowerCase()}`
     }));
-    bot.sendMessage(callback.message.chat.id, "Выберите минимальную редкость моба. " +
-        "Если ищете пробуждённого монстра, добавляйте одну звезду (напр. оракул 5*, пробуждённая 6*)." +
-        " Все мобы а2 имеют 6*.", {
+    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.stars.gte}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["1", "2", "3"]),
@@ -33,9 +32,7 @@ module.exports = [["monsters.filter.type.base_stars", function (session, callbac
     let buildKeyboard = (stars) => stars.map(star => ({
         text: star, callback_data: `monsters.filter.type.base_stars.lte.${star.toLowerCase()}`
     }));
-    bot.sendMessage(callback.message.chat.id, "Выберите максимальную редкость моба. " +
-        "Если ищете пробуждённого монстра, добавляйте одну звезду (напр. оракул 5*, пробуждённая 6*)." +
-        " Все мобы а2 имеют 6*.", {
+    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.stars.lte}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["1", "2", "3"]),

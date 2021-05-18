@@ -1,13 +1,13 @@
 const bot = require('../bot');
 const updateFilter = require('../monsters/functions/updateFilter');
-
+const dictionary = require('../dictionaries/mainDictionary');
 
 module.exports = [["monsters.filter.type.skills.effects.effect.type", function (session, callback) {
     let buildKeyboard = (effects) => effects.map(effect => ({
         text: effect, callback_data: `monsters.filter.type.skills.effects.effect.type.${effect.toLowerCase()}`
     }));
 
-    bot.sendMessage(callback.message.chat.id, "Выберите тип эффекта", {
+    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.effect.type}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["Buff"]),

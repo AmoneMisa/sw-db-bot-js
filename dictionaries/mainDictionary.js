@@ -30,10 +30,8 @@ module.exports = {
                 "In case if any type doesn't choice, full list with all names will show.\n\n" +
                 "After you get result, if you wanna start search again, you [ MUST ] start by /start command."
         },
-        filter: {
-            message: "Choose filter"
-        },
-        monsters_by_id: "Enter id",
+        filter: "Choose filter",
+        monstersById: "Enter id",
         reset: {
             message: "Choose filter for reset.",
             filter: "Filter",
@@ -42,8 +40,8 @@ module.exports = {
         result: {
             message: "Choose filter type. Pressing it again changes the sort order.\nDefault: smallest to largest."
         },
-        get_result: "Nothing found",
-        update_filter: "Your filters",
+        getResult: "Nothing found",
+        updateFilter: "Your filters",
         monsters: {
             awaken: "Monster awakening level",
             element: "Choose element",
@@ -58,7 +56,7 @@ module.exports = {
                     "If you are looking for an awakened monster, add one star (eg. Oracle 5*, awakened 6*).",
             },
             type: "Choose monster type",
-            leader_skill: {
+            leaderSkill: {
                 amount: "Choose a value",
                 area: "Choose a value",
                 attribute: "Choose attribute",
@@ -71,7 +69,7 @@ module.exports = {
                 filter: "Choose a skill properties",
                 hits: "Choose a hits count",
                 passive: "Passive or active",
-                scales_with: "Scales with",
+                scalesWith: "Scales with",
                 slot: "Choose a slot number"
             },
             skillEffect: {
@@ -85,6 +83,7 @@ module.exports = {
                 type: "Choose a effect type"
             },
             stats: {
+                filter: "Choose a filter",
                 accuracy: "Choose a value.",
                 attack: {
                     filter: "Choose a value.",
@@ -107,7 +106,7 @@ module.exports = {
                     gte: "Search value greater than"
                 },
                 resistance: "Choose a value.",
-                cri_rate: "Choose a value."
+                criRate: "Choose a value."
             }
         }
     }, "ru": {
@@ -142,10 +141,8 @@ module.exports = {
                 "В случае, если тип не выбран, будет показан список со всеми возможными эффектами.\n\n" +
                 "После получения результата, если Вы хотите начать поиск заново, [ОБЯЗАТЕЛЬНО] начинать с команды /start"
         },
-        filter: {
-            message: "Выберите фильтр"
-        },
-        monsters_by_id: "Введите id",
+        filter: "Выберите фильтр",
+        monstersById: "Введите id",
         reset: {
             message: "Выберите фильтр для сброса.",
             filter: "Фильтр",
@@ -154,8 +151,8 @@ module.exports = {
         result: {
             message: "Выберите тип фильтра. Повторное нажатие меняет порядок сортировки.\nПо умолчанию: от меньшего к большему."
         },
-        get_result: "Ничего не найдено",
-        update_filter: "Ваши фильтры",
+        getResult: "Ничего не найдено",
+        updateFilter: "Ваши фильтры",
         monsters: {
             awaken: "Уровень пробуждения монстра",
             element: "Выберите элемент",
@@ -170,7 +167,7 @@ module.exports = {
                     "Если ищете пробуждённого монстра, добавляйте одну звезду (напр. оракул 5*, пробуждённая 6*).",
             },
             type: "Выберите тип монстра",
-            leader_skill: {
+            leaderSkill: {
                 amount: "Выберите значение",
                 area: "Выберите значение",
                 attribute: "Выберите аттрибут",
@@ -183,7 +180,7 @@ module.exports = {
                 filter: "Выберите свойства скилла",
                 hits: "Выберите количество ударов",
                 passive: "Пассивный или активный",
-                scales_with: "Увеличение от",
+                scalesWith: "Увеличение от",
                 slot: "Выберите номер слота"
             },
             skillEffect: {
@@ -197,6 +194,7 @@ module.exports = {
                 type: "Выберите тип эффекта"
             },
             stats: {
+                filter: "Выберите фильтр",
                 accuracy: "Выберите значение.",
                 attack: {
                     filter: "Выберите значение.",
@@ -219,7 +217,7 @@ module.exports = {
                     gte: "Искать значение больше, чем"
                 },
                 resistance: "Выберите значение.",
-                cri_rate: "Выберите значение."
+                criRate: "Выберите значение."
             }
         }
     }

@@ -1,12 +1,13 @@
 const bot = require('../bot');
 const updateFilter = require('../monsters/functions/updateFilter');
+const dictionary = require('../dictionaries/mainDictionary');
 
 module.exports = [["monsters.filter.type.skills.cooltime", function (session, callback) {
     let buildKeyboard = (skills) => skills.map(skill => ({
         text: skill, callback_data: `monsters.filter.type.skills.cooltime.${skill.toLowerCase()}`
     }));
 
-    bot.sendMessage(callback.message.chat.id, "Выберите кд скилла", {
+    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.skills.cooltime}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["0", "1", "2", "3"]),

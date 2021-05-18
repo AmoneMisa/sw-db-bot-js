@@ -1,9 +1,10 @@
 const bot = require('../bot');
 const updateFilter = require('../monsters/functions/updateFilter');
+const dictionary = require('../dictionaries/mainDictionary');
 
 module.exports = [
     ["monsters.filter.type.name", function (session, callback) {
-        bot.sendMessage(callback.message.chat.id, "Введите имя или название семейства", {
+        bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.name}`, {
             reply_markup: {
                 force_reply: true
             }

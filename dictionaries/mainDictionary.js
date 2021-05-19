@@ -1,8 +1,6 @@
 module.exports = {
     "en": {
-        index: {
-            start: "Choose what you want to filter"
-        },
+        index: "Choose what you want to filter. Or you can change language to Russian",
         language: {
             message: "Choose language",
             message_2: "Your language"
@@ -30,23 +28,23 @@ module.exports = {
                 "In case if any type doesn't choice, full list with all names will show.\n\n" +
                 "After you get result, if you wanna start search again, you [ MUST ] start by /start command."
         },
-        filter: "Choose filter",
+        filter: "Select filter to continue",
         monstersById: "Enter id",
         reset: {
-            message: "Choose filter for reset.",
+            message: "Select filter for reset.",
             filter: "Filter",
             message_2: "has been reset. For search again, use /start"
         },
         result: {
-            message: "Choose filter type. Pressing it again changes the sort order.\nDefault: smallest to largest."
+            message: "Select filter type to continue. Pressing it again changes the sort order.\nDefault: smallest to largest."
         },
         getResult: "Nothing found",
         updateFilter: "Your filters",
         monsters: {
             awaken: "Monster awakening level",
-            element: "Choose element",
+            element: "Pick an Element of monster",
             fusion: "Is fusion food",
-            name: "Enter monster name or family name",
+            name: "Enter the monster or which family it belongs to.",
             stars: {
                 message: "Choose to filter the rarity of the monster.",
                 gte: "Choose the mi rarity of the monster. " +
@@ -110,9 +108,7 @@ module.exports = {
             }
         }
     }, "ru": {
-        index: {
-            start: "Выберите то, что хотите отфильтровать"
-        },
+        index: "Выберите то, что хотите отфильтровать. Или же, Вы можете изменить язык на английский",
         language: {
             message: "Выберите язык",
             message_2: "Выбран язык: "

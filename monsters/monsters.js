@@ -4,7 +4,6 @@ const monstersReset = require('./monstersReset');
 const monstersResult = require('./monstersResult');
 const monstersById = require('./monstersById');
 const monsterHelp = require('./monsterHelp');
-const monsterLanguage = require('./monsterLanguage');
 
 module.exports = [
     ...monstersMain,
@@ -12,6 +11,5 @@ module.exports = [
     ...monstersReset,
     ...monstersResult,
     ...monstersById,
-    ...monsterHelp,
-    ...monsterLanguage
+    ...monsterHelp
 ];

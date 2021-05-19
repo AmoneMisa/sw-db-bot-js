@@ -5,16 +5,21 @@ const skillsCallbacks = require('./skills/skills');
 const skillEffectsCallbacks = require('./skillEffects/skillEffects');
 const effectsCallbacks = require('./effects/effects');
 const leaderSkillCallbacks = require('./leaderSkill/leaderSkill');
+const languageCallback = require('./language');
 const bot = require('./bot');
+const dictionary = require('./dictionaries/mainDictionary');
 
 let sessions = {};
 
 bot.onText(/\/start/, (msg) => {
     sessions[`${msg.chat.id}`] = {language: "ru"};
 
-    bot.sendMessage(msg.chat.id, "Выберите то, что хотите отфильтровать", {
+    bot.sendMessage(msg.chat.id, `${dictionary[sessions[`${msg.chat.id}`].language].index}`, {
         reply_markup: {
             inline_keyboard: [[{
+                text: "Language",
+                callback_data: "language"
+            }], [{
                 text: "Monsters",
                 callback_data: "monsters"
             }]]
@@ -30,6 +35,7 @@ function addCallbacks(callbackArray) {
     }
 }
 
+addCallbacks(languageCallback);
 addCallbacks(monstersCallbacks);
 addCallbacks(monsterPropertiesCallbacks);
 addCallbacks(monsterStatsCallbacks);

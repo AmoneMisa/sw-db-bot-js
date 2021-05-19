@@ -10,9 +10,6 @@ module.exports = [["monsters", function (session, callback) {
             }, {
                 text: "Help",
                 callback_data: "monsters.help"
-            }, {
-                text: "Language",
-                callback_data: "monsters.language"
             }], [{
                 text: "Reset",
                 callback_data: "monsters.reset"

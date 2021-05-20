@@ -1,5 +1,5 @@
 const bot = require('../bot');
-const updateFilter = require('../monsters/functions/updateFilter');
+const updateFilter = require('../monster/functions/updateFilter');
 const dictionary = require('../dictionaries/mainDictionary');
 
 module.exports = [["monsters.filter.type.skills.slot", function (session, callback) {

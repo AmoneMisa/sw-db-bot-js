@@ -1,4 +1,3 @@
-const defaultInterfaceCallbacks = require('./defaultInterface');
 const newInterfaceCallbacks = require('./newInterface');
 const languageCallback = require('./language');
 const interfaceCallback = require('./interface');
@@ -36,17 +35,13 @@ function addCallbacks(callbackArray) {
 
 addCallbacks(languageCallback);
 addCallbacks(interfaceCallback);
+addCallbacks(newInterfaceCallbacks);
 
 bot.on("callback_query", (callback) => {
     let session = sessions[`${callback.message.chat.id}`];
 
     for (let [key, value] of callbacks) {
         if ((key instanceof RegExp && key.test(callback.data)) || callback.data === key) {
-            if (key === "interface.new") {
-                addCallbacks(newInterfaceCallbacks);
-            } else if (key === "interface.default") {
-                addCallbacks(defaultInterfaceCallbacks);
-            }
             value(session, callback);
         }
     }

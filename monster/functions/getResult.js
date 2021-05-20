@@ -18,15 +18,16 @@ module.exports = function getResult(session, callback) {
                 let monster = r.data.content[0];
                 fetchMonsterById(monster.id)
                     .then((r) => {
-                        bot.sendPhoto(callback.message.chat.id, `../../monsters/${r.data.imageFilename}`, {
+                        bot.sendPhoto(callback.message.chat.id, `https://swarfarm.com/static/herders/images/monsters/${r.data.imageFilename}`, {
                             photo: {
                                 photoSize: {
                                     width: 50,
                                     height: 50
                                 }
                             }
+                        }).then(() => {
+                            bot.sendMessage(callback.message.chat.id, formatMonster(r.data));
                         });
-                        bot.sendMessage(callback.message.chat.id, formatMonster(r.data));
                     });
                 return;
             }

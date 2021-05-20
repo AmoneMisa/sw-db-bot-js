@@ -25,6 +25,7 @@ module.exports = function getResult(session, callback) {
 
             let message = "";
             for (let monster of r.data.content) {
+                console.log(monster);
                 message += formatMonsterItem(monster) + "\n";
             }
 

@@ -1,24 +1,23 @@
-const monstersCallbacks = require('./monsters/monsters');
-const monsterPropertiesCallbacks = require('./monsterProperties/monsterProperties');
-const monsterStatsCallbacks = require('./monsterStats/monsterStats');
-const skillsCallbacks = require('./skills/skills');
-const skillEffectsCallbacks = require('./skillEffects/skillEffects');
-const effectsCallbacks = require('./effects/effects');
-const leaderSkillCallbacks = require('./leaderSkill/leaderSkill');
+const defaultInterfaceCallbacks = require('./defaultInterface');
+const newInterfaceCallbacks = require('./newInterface');
 const languageCallback = require('./language');
+const interfaceCallback = require('./interface');
 const bot = require('./bot');
 const dictionary = require('./dictionaries/mainDictionary');
 
 let sessions = {};
 
 bot.onText(/\/start/, (msg) => {
-    sessions[`${msg.chat.id}`] = {language: "ru"};
+    sessions[`${msg.chat.id}`] = {language: "ru", interface: "default"};
 
     bot.sendMessage(msg.chat.id, `${dictionary[sessions[`${msg.chat.id}`].language].index}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "Language",
                 callback_data: "language"
+            }], [{
+                text: "Interface",
+                callback_data: "interface"
             }], [{
                 text: "Monsters",
                 callback_data: "monsters"
@@ -36,19 +35,18 @@ function addCallbacks(callbackArray) {
 }
 
 addCallbacks(languageCallback);
-addCallbacks(monstersCallbacks);
-addCallbacks(monsterPropertiesCallbacks);
-addCallbacks(monsterStatsCallbacks);
-addCallbacks(skillsCallbacks);
-addCallbacks(skillEffectsCallbacks);
-addCallbacks(effectsCallbacks);
-addCallbacks(leaderSkillCallbacks);
+addCallbacks(interfaceCallback);
 
 bot.on("callback_query", (callback) => {
     let session = sessions[`${callback.message.chat.id}`];
 
     for (let [key, value] of callbacks) {
         if ((key instanceof RegExp && key.test(callback.data)) || callback.data === key) {
+            if (key === "interface.new") {
+                addCallbacks(newInterfaceCallbacks);
+            } else if (key === "interface.default") {
+                addCallbacks(defaultInterfaceCallbacks);
+            }
             value(session, callback);
         }
     }

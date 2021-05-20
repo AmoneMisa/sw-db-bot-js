@@ -5,6 +5,10 @@ module.exports = {
             message: "Choose language",
             message_2: "Your language"
         },
+        interface: {
+            message: "Choose interface",
+            message_2: "Your interface"
+        },
         main: "Choose what you want to do",
         help: {
             message: "Enter for start search",
@@ -112,6 +116,10 @@ module.exports = {
         language: {
             message: "Выберите язык",
             message_2: "Выбран язык: "
+        },
+        interface: {
+            message: "Выберите интерфейс",
+            message_2: "Ваш интерфейс"
         },
         main: "Выберите действие",
         help: {

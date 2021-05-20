@@ -13,6 +13,9 @@ module.exports = [["monsters", function (session, callback) {
             }], [{
                 text: "Reset",
                 callback_data: "monsters.reset"
+            }, {
+                text: "Get result",
+                callback_data: "monsters.new.result"
             }]]
         }
     });

@@ -30,6 +30,7 @@ module.exports = {
         },
         skillEffectsDictionary: {
             "aoe": "Аое",
+            "damage": "Наносит урон",
             "chance": "Шанс прохождения"
         },
         effectDictionary: {
@@ -73,6 +74,7 @@ module.exports = {
         },
         skillEffectsDictionary: {
             "aoe": "Аое",
+            "damage": "Deal damage",
             "chance": "Chance"
         },
         effectDictionary: {

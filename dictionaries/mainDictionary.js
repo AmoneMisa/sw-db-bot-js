@@ -77,6 +77,7 @@ module.exports = {
             skillEffect: {
                 aoe: "Aoe",
                 chance: "Chance of overlaying effect",
+                dmg: "Does skill effect deal damage?",
                 filter: "Choose skill effect properties"
             },
             effect: {
@@ -190,6 +191,7 @@ module.exports = {
             skillEffect: {
                 aoe: "Массовый или одиночный",
                 chance: "Шанс наложения эффекта",
+                dmg: "Наносит ли эффект скилла урон?",
                 filter: "Выбрать свойства эффекта скилла"
             },
             effect: {

@@ -37,7 +37,6 @@ module.exports = function (effects) {
         if (skillEffect.note) {
             effectsMessage += `Note: ${skillEffect.note}\n`
         }
-
         if (skillEffect.effect) {
             effectsMessage += `- Effect -\n${formatEffect(skillEffect.effect)}`;
         }

@@ -7,7 +7,7 @@ module.exports = function (monster) {
         skills += `\n - Slot: ${skill.slot} -
 Cooltime: ${skill.cooltime} | Hits: ${skill.hits} | Max lvl: ${skill.maxLevel}\n`;
 
-        if (skill.scalesWith) {
+        if (skill.scalesWith && skill.scalesWith.length) {
             skills += `Scales with: ${skill.scalesWith}\n`
         }
         if (skill.multiplierFormula) {

@@ -1,44 +1,37 @@
-const newInterfaceCallbacks = require('./newInterface');
-const languageCallback = require('./language');
-const interfaceCallback = require('./interface');
+const callbacks = require('./callbacks');
 const bot = require('./bot');
+const languageByChatId = require('./languageByChatId');
 const dictionary = require('./dictionaries/mainDictionary');
 
 let sessions = {};
 
 bot.onText(/\/start/, (msg) => {
-    sessions[`${msg.chat.id}`] = {language: "ru", interface: "default"};
+    languageByChatId[msg.chat.id] = languageByChatId[msg.chat.id] || "ru";
 
-    bot.sendMessage(msg.chat.id, `${dictionary[sessions[`${msg.chat.id}`].language].index}`, {
+    sessions[msg.chat.id] = {
+        messages: [],
+        language: languageByChatId[msg.chat.id]
+    };
+
+    let session = sessions[msg.chat.id];
+
+    bot.sendMessage(msg.chat.id, `${dictionary[session.language].index}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "Language",
                 callback_data: "language"
             }], [{
-                text: "Interface",
-                callback_data: "interface"
-            }], [{
                 text: "Monsters",
                 callback_data: "monsters"
             }]]
         }
+    }).then(msg => {
+        session.messages[0] = msg.message_id;
     });
 });
 
-let callbacks = [];
-
-function addCallbacks(callbackArray) {
-    for (let item of callbackArray) {
-        callbacks.push(item);
-    }
-}
-
-addCallbacks(languageCallback);
-addCallbacks(interfaceCallback);
-addCallbacks(newInterfaceCallbacks);
-
 bot.on("callback_query", (callback) => {
-    let session = sessions[`${callback.message.chat.id}`];
+    let session = sessions[callback.message.chat.id];
 
     for (let [key, value] of callbacks) {
         if ((key instanceof RegExp && key.test(callback.data)) || callback.data === key) {

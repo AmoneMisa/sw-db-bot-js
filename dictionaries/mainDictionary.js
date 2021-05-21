@@ -1,6 +1,6 @@
 module.exports = {
     "en": {
-        index: "Choose what you want to filter. Or you can change language to Russian",
+        index: "Choose what you want to search. Or you can change language to Russian",
         language: {
             message: "Choose language",
             message_2: "Your language"
@@ -112,10 +112,10 @@ module.exports = {
             }
         }
     }, "ru": {
-        index: "Выберите то, что хотите отфильтровать. Или же, Вы можете изменить язык на английский",
+        index: "Что ищем?. Или же, Вы можете изменить язык на английский",
         language: {
             message: "Выберите язык",
-            message_2: "Выбран язык: "
+            message_2: "Выбран язык"
         },
         interface: {
             message: "Выберите интерфейс",

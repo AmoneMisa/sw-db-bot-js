@@ -23,7 +23,7 @@ module.exports = {
                 "You can use some filters at the same time switching by buttons\n" +
                 "!Important filter [ Name ] must have only one value. The search is performed by an exact match. \n" +
                 "If there is a typo, it will not find anything.\n" +
-                "You must enter name only in > English <.\n" +
+                "You must enter name only in > *English* <.\n" +
                 "You can enter with a small or capital letter, or a caps.\n\n" +
                 "The output of several monsters is displayed as: Name (or family name), base stars, element.\n" +
                 "The output of one monster contains: Name (or family name), base stars, element," +
@@ -134,7 +134,7 @@ module.exports = {
                 "[ Stats ] - сбросит все статы.\n" +
                 "[ Skills ] - все скиллы. \n\n" +
                 "Вы можете использовать одновременно несколько фильтров, переключаясь по кнопкам. \n" +
-                "!Важно Фильтр [ Name ] может содержать только одно значение. Поиск осуществляется точным совпадением. \n" +
+                "!Важно Фильтр [ Name ] может содержать только _одно_ значение. Поиск осуществляется точным совпадением. \n" +
                 "В случае, если будет допущена опечатка - ничего не найдёт.\n" +
                 "Вводить имя или название нужно\n" +
                 "> только на английском языке <.\n" +

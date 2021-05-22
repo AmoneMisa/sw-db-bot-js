@@ -3,14 +3,14 @@ const updateFilter = require('../../../../functions/updateFilter');
 const dictionary = require('../../../../dictionaries/mainDictionary');
 
 let filters = {
-    "atk": "Atk",
-    "def": "Def",
-    "spd": "Spd",
-    "attackers_level": "Attacker's level",
-    "target_spd": "Target Spd",
-    "relative_spd": "Relative Spd",
-    "target_max_hp": "Target Max HP",
-    "max_hp": "Max HP",
+    "atk": "ATK",
+    "def": "DEF",
+    "spd": "SPD",
+    "attackers_level": "Attacker's Level",
+    "target_spd": "Target SPD",
+    "relative_spd": "Relative SPD",
+    "target_max_hp": "Target MAX HP",
+    "max_hp": "MAX HP",
     "missing_hp": "Missing HP",
     "current_hp": "Current HP",
     "current_hp_percent": "Current HP %",
@@ -121,7 +121,8 @@ module.exports = [["monsters.filter.type.skills.scales_with", function (session,
 
     if (!session.filter.skills[0].scalesWith.includes(filters[scalesWith]) && filters[scalesWith] !== undefined) {
         session.filter.skills[0].scalesWith.push(filters[scalesWith]);
+        console.log(session.filter.skills[0]);
+        updateFilter(session, callback);
     }
-    updateFilter(session, callback);
     bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
 }]];

@@ -4,10 +4,10 @@ const fetchAllMonsters = require('../../functions/fetch/fetchAllMonsters');
 const dictionary = require('../../dictionaries/mainDictionary');
 
 module.exports = [["monsters.result", function (session, callback) {
-    // if (!session.filter) {
-    //     fetchAllMonsters(session, callback);
-    //     return;
-    // }
+    if (!session.filter) {
+        fetchAllMonsters(session, callback);
+        return;
+    }
     getResult(session, callback);
 }], ["monsters.prev_page", function (session, callback) {
     session.page--;

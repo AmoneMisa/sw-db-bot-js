@@ -40,7 +40,7 @@ bot.on("callback_query", (callback) => {
     }
 
     bot.answerCallbackQuery(callback.id);
-    console.log(session);
+   console.log(session);
 });
 
 bot.on('polling_error', (error) => {

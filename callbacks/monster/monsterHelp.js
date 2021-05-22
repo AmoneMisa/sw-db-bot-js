@@ -1,8 +1,11 @@
-const bot = require('../../bot');
 const dictionary = require('../../dictionaries/mainDictionary');
+const sendMessage = require('../../functions/sendMessage');
+const deleteMessage = require('../../functions/deleteMessage');
 
 module.exports = [["monsters.help", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, `/start \\- ${dictionary[session.language].help.message}\n\n` +
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
+    session.anchorMessageId = callback.message.message_id;
+    sendMessage(session, callback.message.chat.id, `/start - ${dictionary[session.language].help.message}\n\n` +
         `${dictionary[session.language].help.text}`, {
         reply_markup: {
             inline_keyboard: [[{
@@ -12,5 +15,5 @@ module.exports = [["monsters.help", function (session, callback) {
         }
     });
 }], ["monsters.help.close", function (session, callback) {
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
+    deleteMessage(callback.message.chat.id, session.messages, session.anchorMessageId);
 }]];

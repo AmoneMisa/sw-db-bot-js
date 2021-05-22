@@ -1,5 +1,5 @@
 const bot = require('../../../../bot');
-const updateFilter = require('../../../../functions/updateFilter');
+const updateFilter = require('../../../../functions/monsters/updateFilter');
 const dictionary = require('../../../../dictionaries/mainDictionary');
 
 let filters = {
@@ -24,6 +24,7 @@ let filters = {
 };
 
 module.exports = [["monsters.filter.type.skills.scales_with", function (session, callback) {
+    session.anchorMessageId = callback.message.message_id;
     let buildKeyboard = (skills) => skills.map(([text, callback]) => ({
         text: text, callback_data: `monsters.filter.type.skills.scales_with.${callback}`
     }));

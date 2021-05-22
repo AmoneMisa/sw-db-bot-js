@@ -1,6 +1,6 @@
 const formatFilterString = require('./format/formatFilterString');
-const bot = require('../bot');
-const dictionary = require('../dictionaries/mainDictionary');
+const bot = require('../../bot');
+const dictionary = require('../../dictionaries/mainDictionary');
 
 module.exports = function (session, callback) {
     let text = `${dictionary[session.language].updateFilter} ${formatFilterString(session.filter, session.language)}`;

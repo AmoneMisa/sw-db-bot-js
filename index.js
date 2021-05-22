@@ -2,6 +2,7 @@ const callbacks = require('./callbacks');
 const bot = require('./bot');
 const languageByChatId = require('./languageByChatId');
 const dictionary = require('./dictionaries/mainDictionary');
+const sendMessage = require('./functions/sendMessage');
 
 let sessions = {};
 
@@ -15,32 +16,47 @@ bot.onText(/\/start/, (msg) => {
 
     let session = sessions[msg.chat.id];
 
-    bot.sendMessage(msg.chat.id, `${dictionary[session.language].index}`, {
+    sendMessage(session, msg.chat.id, `${dictionary[session.language].index}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "Language",
                 callback_data: "language"
             }], [{
-                text: "Monsters",
+                text: "Search Monsters",
                 callback_data: "monsters"
+            }, {
+                text: "Summon scrolls",
+                callback_data: "scrolls"
             }]]
         }
-    }).then(msg => {
-        session.messages[0] = msg.message_id;
     });
+});
+
+bot.on('message', (msg) => {
+    let session = sessions[msg.chat.id];
+
+    if (!session) {
+        return;
+    }
+
+    session.messages.push(msg.message_id);
+    console.log(session);
 });
 
 bot.on("callback_query", (callback) => {
     let session = sessions[callback.message.chat.id];
+    let results = [];
 
     for (let [key, value] of callbacks) {
         if ((key instanceof RegExp && key.test(callback.data)) || callback.data === key) {
-            value(session, callback);
+            results.push(value(session, callback) || Promise.resolve());
         }
     }
 
-    bot.answerCallbackQuery(callback.id);
-   console.log(session);
+    Promise.all(results).then(() => {
+        bot.answerCallbackQuery(callback.id);
+        console.log(session);
+    });
 });
 
 bot.on('polling_error', (error) => {

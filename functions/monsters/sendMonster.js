@@ -1,4 +1,4 @@
-const bot = require('../bot');
+const bot = require('../../bot');
 const formatMonster = require('./format/formatMonster');
 
 module.exports = function (chatId, monster) {

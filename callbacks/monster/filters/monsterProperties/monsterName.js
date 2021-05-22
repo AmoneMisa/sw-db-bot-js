@@ -1,5 +1,5 @@
 const bot = require('../../../../bot');
-const updateFilter = require('../../../../functions/updateFilter');
+const updateFilter = require('../../../../functions/monsters/updateFilter');
 const dictionary = require('../../../../dictionaries/mainDictionary');
 
 module.exports = [
@@ -11,6 +11,7 @@ module.exports = [
         }).then((msg) => {
             let id = bot.onReplyToMessage(msg.chat.id, msg.message_id, (msg) => {
                 session.filter.name = msg.text;
+                session.messages[3] = callback.message.message_id;
                 updateFilter(session, callback);
                 bot.removeReplyListener(id);
                 bot.deleteMessage(msg.chat.id, msg.message_id);

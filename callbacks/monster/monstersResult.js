@@ -1,6 +1,6 @@
 const bot = require('../../bot');
-const getResult = require('../../functions/getResult');
-const fetchAllMonsters = require('../../functions/fetch/fetchAllMonsters');
+const getResult = require('../../functions/monsters/getResult');
+const fetchAllMonsters = require('../../functions/monsters/fetch/fetchAllMonsters');
 const dictionary = require('../../dictionaries/mainDictionary');
 
 module.exports = [["monsters.result", function (session, callback) {

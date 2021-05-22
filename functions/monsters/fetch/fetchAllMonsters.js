@@ -1,6 +1,6 @@
 const axios = require('axios');
 const formatMonsterItem = require('../format/formatMonsterItem');
-const bot = require('../../bot');
+const bot = require('../../../bot');
 
 module.exports = function (session, callback) {
     session.page = session.page || 0;

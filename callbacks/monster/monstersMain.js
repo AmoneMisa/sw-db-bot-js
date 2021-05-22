@@ -1,8 +1,10 @@
-const bot = require('../../bot');
 const dictionary = require('../../dictionaries/mainDictionary');
+const sendMessage = require('../../functions/sendMessage');
+const deleteMessage = require('../../functions/deleteMessage');
 
 module.exports = [["monsters", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].main}`, {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
+    return sendMessage(session, callback.message.chat.id, `${dictionary[session.language].main}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "Filter",

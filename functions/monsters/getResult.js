@@ -1,4 +1,4 @@
-const bot = require('../bot');
+const bot = require('../../bot');
 const fetchMonsters = require('./fetch/fetchMonsters');
 const fetchMonsterById = require('./fetch/fetchMonsterById');
 const formatMonsterItem = require('./format/formatMonsterItem');

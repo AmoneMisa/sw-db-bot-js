@@ -22,5 +22,8 @@ module.exports = [["monsters.filter.type.skills", function (session, callback) {
         reply_markup: {
             inline_keyboard: buttons
         }
-    }).then(() => session.filter.skills = session.filter.skills || [{}]);
+    }).then((msg) => {
+        session.filter.skills = session.filter.skills || [{}];
+        session.messages[3] = msg.message_id;
+    });
 }]];

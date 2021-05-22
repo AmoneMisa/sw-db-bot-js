@@ -1,7 +1,7 @@
 const bot = require('../../bot');
-const fetchMonsterById = require('../../functions/fetch/fetchMonsterById');
+const fetchMonsterById = require('../../functions/monsters/fetch/fetchMonsterById');
 const dictionary = require('../../dictionaries/mainDictionary');
-const sendMonster = require('../../functions/sendMonster');
+const sendMonster = require('../../functions/monsters/sendMonster');
 
 module.exports = [["monsters.by_id", function (session, callback) {
     bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monstersById}`, {

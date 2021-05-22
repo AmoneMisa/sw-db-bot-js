@@ -14,7 +14,10 @@ module.exports = [
                     buildKeyboard(["Type"])
                 ]
             }
-        }).then(() => session.filter.skills[0].effects[0].effect = session.filter.skills[0].effects[0].effect || {});
+        }).then((msg) => {
+            session.filter.skills[0].effects[0].effect = session.filter.skills[0].effects[0].effect || {}
+            session.messages[5] = msg.message_id;
+        });
         bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
     }]
 ];

@@ -1,11 +1,14 @@
 const bot = require('../bot');
 const dictionary = require('../dictionaries/mainDictionary');
 const languageByChatId = require('../languageByChatId');
-
-let languageMsgId = null;
+const sendMessage = require('../functions/sendMessage');
+const deleteMessage = require('../functions/deleteMessage');
 
 module.exports = [["language", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].language.message}`, {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
+    session.anchorMessageId = callback.message.message_id;
+
+    return sendMessage(session, callback.message.chat.id, `${dictionary[session.language].language.message}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "Ru",
@@ -18,17 +21,30 @@ module.exports = [["language", function (session, callback) {
     });
 }], [/^language\./, function (session, callback) {
     const [, language] = callback.data.match(/^language\.(.*)$/);
+    let prevLanguage = session.language;
     session.language = language;
     languageByChatId[callback.message.chat.id] = language;
 
-    if (languageMsgId !== null) {
-        bot.editMessageText(`${dictionary[session.language].language.message_2}: ${language}`, {
-            message_id: languageMsgId,
-            chat_id: callback.message.chat.id
-        });
-    } else {
-        bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].language.message_2}: ${language}`)
-            .then(msg => languageMsgId = msg.message_id);
+    deleteMessage(callback.message.chat.id, session.messages, session.anchorMessageId);
+
+    if (prevLanguage === language) {
+        return;
     }
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
+
+    bot.editMessageText(`${dictionary[session.language].index}`, {
+        message_id: session.anchorMessageId,
+        chat_id: callback.message.chat.id,
+        reply_markup: {
+            inline_keyboard: [[{
+                text: "Language",
+                callback_data: "language"
+            }], [{
+                text: "Search Monsters",
+                callback_data: "monsters"
+            }, {
+                text: "Summon scrolls",
+                callback_data: "scrolls"
+            }]]
+        }
+    });
 }]];

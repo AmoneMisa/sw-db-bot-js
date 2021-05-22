@@ -1,5 +1,5 @@
 const bot = require('../../../../bot');
-const updateFilter = require('../../../../functions/updateFilter');
+const updateFilter = require('../../../../functions/monsters/updateFilter');
 const dictionary = require('../../../../dictionaries/mainDictionary');
 
 module.exports = [["monsters.filter.type.stats.defense", function (session, callback) {
@@ -23,6 +23,7 @@ module.exports = [["monsters.filter.type.stats.defense", function (session, call
     }).then((msg) => {
         let id = bot.onReplyToMessage(msg.chat.id, msg.message_id, (msg) => {
             session.filter.maxDefenseGte = msg.text;
+            session.messages[5] = callback.message.message_id;
             updateFilter(session, callback);
             bot.removeReplyListener(id);
             bot.deleteMessage(msg.chat.id, msg.message_id);
@@ -38,6 +39,7 @@ module.exports = [["monsters.filter.type.stats.defense", function (session, call
     }).then((msg) => {
         let id = bot.onReplyToMessage(msg.chat.id, msg.message_id, (msg) => {
             session.filter.maxDefenseLte = msg.text;
+            session.messages[5] = callback.message.message_id;
             updateFilter(session, callback);
             bot.removeReplyListener(id);
             bot.deleteMessage(msg.chat.id, msg.message_id);

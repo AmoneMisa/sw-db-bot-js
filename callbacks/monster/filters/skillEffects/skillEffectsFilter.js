@@ -13,6 +13,9 @@ module.exports = [["monsters.filter.type.skills.effects", function (session, cal
                 buildKeyboard(["Chance", "Effect",])
             ]
         }
-    }).then(() => session.filter.skills[0].effects = session.filter.skills[0].effects || [{}]);
+    }).then((msg) => {
+        session.filter.skills[0].effects = session.filter.skills[0].effects || [{}];
+        session.messages[4] = msg.message_id;
+    });
     bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
 }]];

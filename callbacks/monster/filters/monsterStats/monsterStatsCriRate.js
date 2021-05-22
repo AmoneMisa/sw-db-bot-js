@@ -1,5 +1,5 @@
 const bot = require('../../../../bot');
-const updateFilter = require('../../../../functions/updateFilter');
+const updateFilter = require('../../../../functions/monsters/updateFilter');
 const dictionary = require('../../../../dictionaries/mainDictionary');
 
 module.exports = [["monsters.filter.type.stats.cri_rate", function (session, callback) {

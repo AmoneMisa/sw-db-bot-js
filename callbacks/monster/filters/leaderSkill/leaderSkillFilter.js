@@ -13,5 +13,8 @@ module.exports = [["monsters.filter.type.leader_skill", function (session, callb
                 buildKeyboard(["Area", "Element"])
             ]
         }
-    }).then(() => session.filter.leaderSkill = session.filter.leaderSkill || {});
+    }).then((msg) => {
+        session.filter.leaderSkill = session.filter.leaderSkill || {};
+        session.messages[3] = msg.message_id;
+    });
 }]];

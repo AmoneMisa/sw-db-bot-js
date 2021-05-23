@@ -1,7 +1,11 @@
-const bot = require('../../../../bot');
 const dictionary = require('../../../../dictionaries/mainDictionary');
+const sendMessage = require('../../../../functions/sendMessage');
+const deleteMessage = require('../../../../functions/deleteMessage');
 
 module.exports = [["monsters.filter.type.skills", function (session, callback) {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
+    session.filter.skills = session.filter.skills || [{}];
+
     let buildKeyboard = (skills) => skills.map(([text, callback]) => ({
         text: text, callback_data: `monsters.filter.type.skills.${callback}`
     }));
@@ -18,12 +22,9 @@ module.exports = [["monsters.filter.type.skills", function (session, callback) {
         ["Effects", "effects"]
     ]].map(buildKeyboard);
 
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.skills.filter}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.filter}`, {
         reply_markup: {
             inline_keyboard: buttons
         }
-    }).then((msg) => {
-        session.filter.skills = session.filter.skills || [{}];
-        session.messages[3] = msg.message_id;
     });
 }]];

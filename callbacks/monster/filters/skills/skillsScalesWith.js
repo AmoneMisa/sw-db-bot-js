@@ -1,6 +1,7 @@
-const bot = require('../../../../bot');
 const updateFilter = require('../../../../functions/monsters/updateFilter');
 const dictionary = require('../../../../dictionaries/mainDictionary');
+const sendMessage = require('../../../../functions/sendMessage');
+const deleteMessage = require('../../../../functions/deleteMessage');
 
 let filters = {
     "atk": "ATK",
@@ -24,7 +25,9 @@ let filters = {
 };
 
 module.exports = [["monsters.filter.type.skills.scales_with", function (session, callback) {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     session.anchorMessageId = callback.message.message_id;
+
     let buildKeyboard = (skills) => skills.map(([text, callback]) => ({
         text: text, callback_data: `monsters.filter.type.skills.scales_with.${callback}`
     }));
@@ -40,14 +43,13 @@ module.exports = [["monsters.filter.type.skills.scales_with", function (session,
         ["Alive", "_alive"],
         ["Life share", "_life_share"]
     ]].map(buildKeyboard);
-
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.skills.scalesWith}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.scalesWith}`, {
         reply_markup: {
             inline_keyboard: buttons
         }
     });
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
 }], ["monsters.filter.type.skills.scales_with._spd", function (session, callback) {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     let buildKeyboard = (skills) => skills.map(([text, callback]) => ({
         text: text, callback_data: `monsters.filter.type.skills.scales_with.${callback}`
     }));
@@ -58,12 +60,13 @@ module.exports = [["monsters.filter.type.skills.scales_with", function (session,
         ["Speed", "spd"]
     ]].map(buildKeyboard);
 
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.skills.scalesWith}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.scalesWith}`, {
         reply_markup: {
             inline_keyboard: buttons
         }
     });
 }], ["monsters.filter.type.skills.scales_with._hp", function (session, callback) {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     let buildKeyboard = (skills) => skills.map(([text, callback]) => ({
         text: text, callback_data: `monsters.filter.type.skills.scales_with.${callback}`
     }));
@@ -78,12 +81,13 @@ module.exports = [["monsters.filter.type.skills.scales_with", function (session,
         ["Target Current HP %", "target_current_hp_percent"]
     ]].map(buildKeyboard);
 
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.skills.scalesWith}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.scalesWith}`, {
         reply_markup: {
             inline_keyboard: buttons
         }
     });
 }], ["monsters.filter.type.skills.scales_with._alive", function (session, callback) {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     let buildKeyboard = (skills) => skills.map(([text, callback]) => ({
         text: text, callback_data: `monsters.filter.type.skills.scales_with.${callback}`
     }));
@@ -96,12 +100,13 @@ module.exports = [["monsters.filter.type.skills.scales_with", function (session,
         ["Alive Enemies", "alive_enemies"]
     ]].map(buildKeyboard);
 
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.skills.scalesWith}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.scalesWith}`, {
         reply_markup: {
             inline_keyboard: buttons
         }
     });
 }], ["monsters.filter.type.skills.scales_with._life_share", function (session, callback) {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     let buildKeyboard = (skills) => skills.map(([text, callback]) => ({
         text: text, callback_data: `monsters.filter.type.skills.scales_with.${callback}`
     }));
@@ -111,7 +116,7 @@ module.exports = [["monsters.filter.type.skills.scales_with", function (session,
         ["Life Share (AOE)", "life_share_aoe"]
     ]].map(buildKeyboard);
 
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.skills.scalesWith}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.scalesWith}`, {
         reply_markup: {
             inline_keyboard: buttons
         }
@@ -122,8 +127,7 @@ module.exports = [["monsters.filter.type.skills.scales_with", function (session,
 
     if (!session.filter.skills[0].scalesWith.includes(filters[scalesWith]) && filters[scalesWith] !== undefined) {
         session.filter.skills[0].scalesWith.push(filters[scalesWith]);
-        console.log(session.filter.skills[0]);
         updateFilter(session, callback);
     }
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
+    deleteMessage(callback.message.chat.id, session.messages, session.anchorMessageId);
 }]];

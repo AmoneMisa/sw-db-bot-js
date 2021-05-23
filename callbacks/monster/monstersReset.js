@@ -55,10 +55,10 @@ module.exports = [["monsters.reset", function (session, callback) {
         delete session.filter[reset];
     }
 
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].reset.filter} ${reset} ${dictionary[session.language].reset.message_2}`)
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].reset.filter} ${reset} ${dictionary[session.language].reset.message_2}`)
         .then(msg => {
-            bot.deleteMessage(msg.chat.id, msg.message_id);
-            bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
+                bot.deleteMessage(msg.chat.id, msg.message_id);
+                bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
         });
     updateFilter(session, callback);
 }]];

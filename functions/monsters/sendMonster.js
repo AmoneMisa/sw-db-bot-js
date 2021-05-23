@@ -15,9 +15,26 @@ module.exports = function (session, chatId, monster) {
         })
         .then((msg) => {
             session.messages.push(msg.message_id);
+            session.monster = monster;
+
+            let buttons = [];
+            let row;
+            let countInRow = monster.skills.length === 4 ? 2 : 3;
+
+            for (let i = 0; i < monster.skills.length; i++) {
+                if (i % countInRow === 0) {
+                    row = [];
+                    buttons.push(row);
+                }
+
+                row.push({text: `Skill ${i + 1}`, callback_data: `monsters.by_id.skill.${i}`});
+            }
+
             sendMessage(session, chatId, formatMonster(monster), {
                 reply_markup: {
-                    inline_keyboard: [[{
+                    inline_keyboard: [
+                        ...buttons,
+                        [{
                         text: "Close",
                         callback_data: "monsters.by_id.close"
                     }]]

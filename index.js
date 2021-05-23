@@ -3,8 +3,16 @@ const bot = require('./bot');
 const languageByChatId = require('./languageByChatId');
 const dictionary = require('./dictionaries/mainDictionary');
 const sendMessage = require('./functions/sendMessage');
+const fs = require('fs');
 
-let sessions = {};
+let sessions;
+
+try {
+    let sessionsJson = fs.readFileSync("./sessions.json");
+    sessions = JSON.parse(sessionsJson);
+} catch (e) {
+    sessions = {};
+}
 
 bot.onText(/\/start/, (msg) => {
     languageByChatId[msg.chat.id] = languageByChatId[msg.chat.id] || "ru";
@@ -25,9 +33,9 @@ bot.onText(/\/start/, (msg) => {
             }], [{
                 text: "Search Monsters",
                 callback_data: "monsters"
-            }, {
-                text: "Summon scrolls",
-                callback_data: "scrolls"
+            }], [{
+                text: "Ля ты крыса (Monkey)",
+                callback_data: "rat"
             }]]
         }
     });
@@ -41,6 +49,7 @@ bot.on('message', (msg) => {
     }
 
     session.messages.push(msg.message_id);
+    ;
     console.log(session);
 });
 
@@ -63,3 +72,11 @@ bot.on("callback_query", (callback) => {
 bot.on('polling_error', (error) => {
     console.error(error);
 });
+
+function writeSessions() {
+    fs.writeFileSync("./sessions.json", JSON.stringify(sessions));
+}
+
+process.on('SIGTERM', writeSessions);
+
+process.on('SIGINT', writeSessions);

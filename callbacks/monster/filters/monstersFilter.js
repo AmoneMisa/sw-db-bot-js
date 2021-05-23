@@ -1,7 +1,9 @@
-const bot = require('../../../bot');
 const dictionary = require('../../../dictionaries/mainDictionary');
+const sendMessage = require('../../../functions/sendMessage');
+const deleteMessage = require('../../../functions/deleteMessage');
 
 module.exports = [["monsters.filter", function (session, callback) {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     session.filter = session.filter || {};
     let buildKeyboard = (buttons) => buttons.map(([text, callback]) => ({
         text: text, callback_data: `monsters.${callback}`
@@ -23,7 +25,7 @@ module.exports = [["monsters.filter", function (session, callback) {
         ["Reset", "reset"]
     ]].map(buildKeyboard);
 
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].filter}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].filter}`, {
         reply_markup: {
             inline_keyboard: buttons
         }

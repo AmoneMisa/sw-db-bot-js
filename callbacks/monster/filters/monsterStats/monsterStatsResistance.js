@@ -1,9 +1,13 @@
-const bot = require('../../../../bot');
 const updateFilter = require('../../../../functions/monsters/updateFilter');
 const dictionary = require('../../../../dictionaries/mainDictionary');
+const sendMessage = require('../../../../functions/sendMessage');
+const deleteMessage = require('../../../../functions/deleteMessage');
 
 module.exports = [["monsters.filter.type.stats.resistance", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.stats.resistance}`, {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
+    session.anchorMessageId = callback.message.message_id;
+
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.stats.resistance}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "15%",
@@ -14,7 +18,7 @@ module.exports = [["monsters.filter.type.stats.resistance", function (session, c
             }]]
         }
     });
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
 }], [/^monsters\.filter\.type\.stats\.resistance\./, function (session, callback) {
     const [, resistance] = callback.data.match(/^monsters\.filter\.type\.stats\.resistance\.(.*)$/);
 
@@ -22,5 +26,5 @@ module.exports = [["monsters.filter.type.stats.resistance", function (session, c
         session.filter.resistance = parseInt(resistance);
     }
     updateFilter(session, callback);
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
+    deleteMessage(callback.message.chat.id, session.messages, session.anchorMessageId);
 }]];

@@ -73,10 +73,11 @@ bot.on('polling_error', (error) => {
     console.error(error);
 });
 
-function writeSessions() {
+function shutdown() {
     fs.writeFileSync("./sessions.json", JSON.stringify(sessions));
+    bot.stopPolling();
 }
 
-process.on('SIGTERM', writeSessions);
+process.on('SIGTERM', shutdown);
 
-process.on('SIGINT', writeSessions);
+process.on('SIGINT', shutdown);

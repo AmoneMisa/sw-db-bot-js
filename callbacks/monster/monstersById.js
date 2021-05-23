@@ -4,6 +4,7 @@ const dictionary = require('../../dictionaries/mainDictionary');
 const sendMonster = require('../../functions/monsters/sendMonster');
 const sendMessage = require('../../functions/sendMessage');
 const deleteMessage = require('../../functions/deleteMessage');
+const formatSkill = require('../../functions/monsters/format/formatSkill');
 
 module.exports = [["monsters.by_id", function (session, callback) {
     deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
@@ -23,6 +24,10 @@ module.exports = [["monsters.by_id", function (session, callback) {
                 .catch((e) => {
                     deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
                     if (e.response && (e.response.status === 400 || e.response.status === 404)) {
+                        bot.sendSticker(callback.message.chat.id, "CAACAgIAAxkBAAIWl2Cqg_3KHzusKubqscU7FRz0d4HFAAKyAAMQIQIQU0i6-SiGGyYfBA")
+                            .then(msg => {
+                                session.messages.push(msg.message_id);
+                            });
                         sendMessage(session, callback.message.chat.id, "Моба с таким id не найдено", {
                             reply_markup: {
                                 inline_keyboard: [[{
@@ -39,4 +44,13 @@ module.exports = [["monsters.by_id", function (session, callback) {
     });
 }], ["monsters.by_id.close", function (session, callback) {
     deleteMessage(callback.message.chat.id, session.messages, session.anchorMessageId);
+}], [/^monsters\.by_id\.skill\./, function (session, callback) {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
+    const [, skillIndex] = callback.data.match(/^monsters\.by_id\.skill\.(.*)$/);
+    if (!session.monster || !session.monster.skills[skillIndex]) {
+        return;
+    }
+
+    let skill = session.monster.skills[skillIndex];
+    sendMessage(session, callback.message.chat.id, formatSkill(skill));
 }]];

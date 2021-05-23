@@ -12,9 +12,7 @@ module.exports = {
         main: "Choose what you want to do",
         help: {
             message: "Enter for start search",
-            text: "[ Get result ] - push for get result \n" +
-                "In case any filter doesn't select, all monsters will be shown \n\n" +
-                "[ Sort ] - push for sort result by one of sorting. Default value from lowest to highest\n" +
+            text: "[ Sort ] - push for sort result by one of sorting. Default value from lowest to highest\n" +
                 "When you click on the same sort again, the order will be changed from larger to smaller.\n\n" +
                 "[ Select ] - push for get result about specific monster from monsters' result list. You should enter the > id < - value from first column. \n\n" +
                 "[ Reset ] - push for reset filters. \n" +
@@ -44,7 +42,7 @@ module.exports = {
             message: "Select filter type to continue. Pressing it again changes the sort order.\nDefault: smallest to largest."
         },
         getResult: "Nothing found",
-        updateFilter: "For get result, push Get Result\n\nYour filters",
+        updateFilter: "Your filters",
         monsters: {
             awaken: "Monster awakening level",
             element: "Pick an Element of monster",
@@ -126,9 +124,7 @@ module.exports = {
         main: "Выберите действие",
         help: {
             message: "Введите, чтобы начать поиск.",
-            text: "[ Get result ] - нажмите, чтобы получить результат \n" +
-                "В случае, если ни один фильтр не выбран, будут показаны все мобы. \n\n" +
-                "[ Sort ] - нажмите, чтобы отсортировать результат по одной из сортировок. По умолчанию значения от наименьшего - к большему.\n" +
+            text: "[ Sort ] - нажмите, чтобы отсортировать результат по одной из сортировок. По умолчанию значения от наименьшего - к большему.\n" +
                 "При повторном нажатии на ту же сортировку, порядок будет изменён на от большего к меньшему.\n\n" +
                 "[ Select ] - нажмите, чтобы получить полную информацию о конкретном мобе из списка найденых. Вам необходимо будет ввести > id < - значение из первой колонки. \n\n" +
                 "[ Reset ] - Нажмите, чтобы сбросить фильтры. \n" +
@@ -136,7 +132,7 @@ module.exports = {
                 "[ Stats ] - сбросит все статы.\n" +
                 "[ Skills ] - все скиллы. \n\n" +
                 "Вы можете использовать одновременно несколько фильтров, переключаясь по кнопкам. \n" +
-                "!Важно Фильтр [ Name ] может содержать только _одно_ значение. Поиск осуществляется точным совпадением. \n" +
+                "!Важно Фильтр [ Name ] может содержать только одно значение. Поиск осуществляется точным совпадением. \n" +
                 "В случае, если будет допущена опечатка - ничего не найдёт.\n" +
                 "Вводить имя или название нужно\n" +
                 "> только на английском языке <.\n" +
@@ -159,7 +155,7 @@ module.exports = {
             message: "Выберите тип фильтра. Повторное нажатие меняет порядок сортировки.\nПо умолчанию: от меньшего к большему."
         },
         getResult: "Ничего не найдено",
-        updateFilter: "Чтобы получить результат, выберите Get Result\n\nВаши фильтры",
+        updateFilter: "Ваши фильтры",
         monsters: {
             awaken: "Уровень пробуждения монстра",
             element: "Выберите элемент",

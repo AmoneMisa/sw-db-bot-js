@@ -1,6 +1,7 @@
 const fetchMonsters = require('./fetch/fetchMonsters');
 const formatMonsterItem = require('./format/formatMonsterItem');
 const formatFilterString = require('./format/formatFilterString');
+const dictionary = require('../../dictionaries/mainDictionary');
 
 module.exports = function (session) {
     session.page = session.page || 0;
@@ -9,7 +10,12 @@ module.exports = function (session) {
 
     return fetchMonsters({...session.filter, source: true}, session.page, session.sortBy, session.sortAsc)
         .then(r => {
-            let message = `${formatFilterString(session.filter, session.language)}\n\n`;
+            let message = "";
+
+            if (Object.keys(session.filter).length) {
+               message += `${dictionary[session.language].updateFilter}${formatFilterString(session.filter, session.language)}\n\n`;
+            }
+
             if (r.data.totalElements === 0) {
                 message += "Ничего не найдено";
             } else {

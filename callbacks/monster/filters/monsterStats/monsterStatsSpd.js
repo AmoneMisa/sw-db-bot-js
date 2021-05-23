@@ -1,9 +1,13 @@
 const bot = require('../../../../bot');
 const updateFilter = require('../../../../functions/monsters/updateFilter');
 const dictionary = require('../../../../dictionaries/mainDictionary');
+const sendMessage = require('../../../../functions/sendMessage');
+const deleteMessage = require('../../../../functions/deleteMessage');
 
 module.exports = [["monsters.filter.type.stats.spd", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.stats.speed.filter}`, {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
+    session.anchorMessageId = callback.message.message_id;
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.stats.speed.filter}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "Greater than",
@@ -14,37 +18,32 @@ module.exports = [["monsters.filter.type.stats.spd", function (session, callback
             }]]
         }
     });
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
 }], ["monsters.filter.type.stats.spd.gte", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.stats.speed.gte}`, {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.stats.speed.gte}`, {
         reply_markup: {
             force_reply: true
         }
     }).then((msg) => {
         let id = bot.onReplyToMessage(msg.chat.id, msg.message_id, (msg) => {
             session.filter.speedGte = msg.text;
-            session.messages[5] = callback.message.message_id;
+            updateFilter(session, callback);
             bot.removeReplyListener(id);
-            bot.deleteMessage(msg.chat.id, msg.message_id);
-            bot.deleteMessage(msg.chat.id, msg.reply_to_message.message_id);
-            bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
+            deleteMessage(callback.message.chat.id, session.messages, session.anchorMessageId);
         });
     });
-    updateFilter(session, callback);
 }], ["monsters.filter.type.stats.spd.lte", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.stats.speed.lte}`, {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.stats.speed.lte}`, {
         reply_markup: {
             force_reply: true
         }
     }).then((msg) => {
         let id = bot.onReplyToMessage(msg.chat.id, msg.message_id, (msg) => {
             session.filter.speedLte = msg.text;
-            session.messages[5] = callback.message.message_id;
             updateFilter(session, callback);
             bot.removeReplyListener(id);
-            bot.deleteMessage(msg.chat.id, msg.message_id);
-            bot.deleteMessage(msg.chat.id, msg.reply_to_message.message_id);
-            bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
+            deleteMessage(callback.message.chat.id, session.messages, session.anchorMessageId);
         });
     });
 }]];

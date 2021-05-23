@@ -1,13 +1,16 @@
-const bot = require('../../../../bot');
 const updateFilter = require('../../../../functions/monsters/updateFilter');
 const dictionary = require('../../../../dictionaries/mainDictionary');
+const sendMessage = require('../../../../functions/sendMessage');
+const deleteMessage = require('../../../../functions/deleteMessage');
 
 module.exports = [["monsters.filter.type.skills.slot", function (session, callback) {
+    deleteMessage(callback.message.chat.id, session.messages , callback.message.message_id);
+    session.anchorMessageId = callback.message.message_id;
+
     let buildKeyboard = (skills) => skills.map(skill => ({
         text: skill, callback_data: `monsters.filter.type.skills.slot.${skill.toLowerCase()}`
     }));
-
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.skills.slot}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.slot}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["1", "2"]),
@@ -15,7 +18,6 @@ module.exports = [["monsters.filter.type.skills.slot", function (session, callba
             ]
         }
     });
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
 }], [/^monsters\.filter\.type\.skills\.slot\./, function (session, callback) {
     const [, slot] = callback.data.match(/^monsters\.filter\.type\.skills\.slot\.(.*)$/);
 
@@ -23,5 +25,5 @@ module.exports = [["monsters.filter.type.skills.slot", function (session, callba
         session.filter.skills[0].slot = parseInt(slot);
     }
     updateFilter(session, callback);
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
+    deleteMessage(callback.message.chat.id, session.messages, session.anchorMessageId);
 }]];

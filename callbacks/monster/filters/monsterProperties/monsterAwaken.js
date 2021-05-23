@@ -1,9 +1,12 @@
-const bot = require('../../../../bot');
 const updateFilter = require('../../../../functions/monsters/updateFilter');
 const dictionary = require('../../../../dictionaries/mainDictionary');
+const sendMessage = require('../../../../functions/sendMessage');
+const deleteMessage = require('../../../../functions/deleteMessage');
 
 module.exports = [["monsters.filter.type.awaken", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.awaken}`, {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
+    session.anchorMessageId = callback.message.message_id;
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.awaken}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "Awaken",
@@ -17,7 +20,6 @@ module.exports = [["monsters.filter.type.awaken", function (session, callback) {
             }]]
         }
     });
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
 }], [/^monsters\.filter\.type\.awaken\./, function (session, callback) {
     const [, awakenLevel] = callback.data.match(/^monsters\.filter\.type\.awaken\.(.*)$/);
 
@@ -25,6 +27,5 @@ module.exports = [["monsters.filter.type.awaken", function (session, callback) {
         session.filter.awakenLevel = parseInt(awakenLevel);
     }
     updateFilter(session, callback);
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
-}]
-];
+    deleteMessage(callback.message.chat.id, session.messages, session.anchorMessageId);
+}]];

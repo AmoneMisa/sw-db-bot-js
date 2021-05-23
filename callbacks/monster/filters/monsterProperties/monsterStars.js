@@ -1,9 +1,13 @@
-const bot = require('../../../../bot');
 const updateFilter = require('../../../../functions/monsters/updateFilter');
 const dictionary = require('../../../../dictionaries/mainDictionary');
+const sendMessage = require('../../../../functions/sendMessage');
+const deleteMessage = require('../../../../functions/deleteMessage');
 
 module.exports = [["monsters.filter.type.base_stars", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.stars.message}`, {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
+    session.anchorMessageId = callback.message.message_id;
+
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.stars.message}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "Greater than",
@@ -14,12 +18,12 @@ module.exports = [["monsters.filter.type.base_stars", function (session, callbac
             }]]
         }
     });
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
 }], ["monsters.filter.type.base_stars.gte", function (session, callback) {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     let buildKeyboard = (stars) => stars.map(star => ({
         text: star, callback_data: `monsters.filter.type.base_stars.gte.${star.toLowerCase()}`
     }));
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.stars.gte}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.stars.gte}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["1", "2", "3"]),
@@ -27,12 +31,12 @@ module.exports = [["monsters.filter.type.base_stars", function (session, callbac
             ]
         }
     });
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
 }], ["monsters.filter.type.base_stars.lte", function (session, callback) {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     let buildKeyboard = (stars) => stars.map(star => ({
         text: star, callback_data: `monsters.filter.type.base_stars.lte.${star.toLowerCase()}`
     }));
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].monsters.stars.lte}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.stars.lte}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["1", "2", "3"]),
@@ -40,7 +44,6 @@ module.exports = [["monsters.filter.type.base_stars", function (session, callbac
             ]
         }
     });
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
 }], [/^monsters\.filter\.type\.base_stars\.gte\./, function (session, callback) {
     const [, baseStars] = callback.data.match(/^monsters\.filter\.type\.base_stars\.gte\.(.*)$/);
 
@@ -49,7 +52,7 @@ module.exports = [["monsters.filter.type.base_stars", function (session, callbac
         session.filter.baseStarsGte = parseInt(baseStars);
     }
     updateFilter(session, callback);
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
+    deleteMessage(callback.message.chat.id, session.messages, session.anchorMessageId);
 }], [/^monsters\.filter\.type\.base_stars\.lte\./, function (session, callback) {
     const [, baseStars] = callback.data.match(/^monsters\.filter\.type\.base_stars\.lte\.(.*)$/);
 
@@ -58,6 +61,5 @@ module.exports = [["monsters.filter.type.base_stars", function (session, callbac
         session.filter.baseStarsLte = parseInt(baseStars);
     }
     updateFilter(session, callback);
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
-}]
-];
+    deleteMessage(callback.message.chat.id, session.messages, session.anchorMessageId);
+}]];

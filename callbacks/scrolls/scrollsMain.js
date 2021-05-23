@@ -1,8 +1,10 @@
-const bot = require('../../bot');
+const sendMessage = require('../../functions/sendMessage');
+const deleteMessage = require('../../functions/deleteMessage');
 const dictionary = require('../../dictionaries/mainDictionary');
 
 module.exports = [["scrolls", function (session, callback) {
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].main}`, {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].main}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "Mystic Scroll",

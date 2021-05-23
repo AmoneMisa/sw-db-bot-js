@@ -37,7 +37,7 @@ module.exports = function (session, callback) {
             });
         }
 
-        bot.sendMessage(callback.message.chat.id, message, {
+        sendMessage(session, callback.message.chat.id, message, {
             reply_markup: {
                 inline_keyboard: [buttons, [
                     {

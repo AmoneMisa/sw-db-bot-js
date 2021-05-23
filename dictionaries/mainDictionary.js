@@ -1,6 +1,6 @@
 module.exports = {
     "en": {
-        index: "Choose what you want to filter. Or you can change language to Russian",
+        index: "Choose what you want to do. You can change language to Russian in that menu",
         language: {
             message: "Choose language",
             message_2: "Your language"
@@ -12,7 +12,8 @@ module.exports = {
         main: "Choose what you want to do",
         help: {
             message: "Enter for start search",
-            text: "[ Get result ] - push for get result \n\n" +
+            text: "[ Get result ] - push for get result \n" +
+                "In case any filter doesn't select, all monsters will be shown \n\n" +
                 "[ Sort ] - push for sort result by one of sorting. Default value from lowest to highest\n" +
                 "When you click on the same sort again, the order will be changed from larger to smaller.\n\n" +
                 "[ Select ] - push for get result about specific monster from monsters' result list. You should enter the > id < - value from first column. \n\n" +
@@ -23,7 +24,7 @@ module.exports = {
                 "You can use some filters at the same time switching by buttons\n" +
                 "!Important filter [ Name ] must have only one value. The search is performed by an exact match. \n" +
                 "If there is a typo, it will not find anything.\n" +
-                "You must enter name only in > English <.\n" +
+                "You must enter name only in > *English* <.\n" +
                 "You can enter with a small or capital letter, or a caps.\n\n" +
                 "The output of several monsters is displayed as: Name (or family name), base stars, element.\n" +
                 "The output of one monster contains: Name (or family name), base stars, element," +
@@ -43,7 +44,7 @@ module.exports = {
             message: "Select filter type to continue. Pressing it again changes the sort order.\nDefault: smallest to largest."
         },
         getResult: "Nothing found",
-        updateFilter: "Your filters",
+        updateFilter: "For get result, push Get Result\n\nYour filters",
         monsters: {
             awaken: "Monster awakening level",
             element: "Pick an Element of monster",
@@ -77,6 +78,7 @@ module.exports = {
             skillEffect: {
                 aoe: "Aoe",
                 chance: "Chance of overlaying effect",
+                dmg: "Does skill effect deal damage?",
                 filter: "Choose skill effect properties"
             },
             effect: {
@@ -112,10 +114,10 @@ module.exports = {
             }
         }
     }, "ru": {
-        index: "Выберите то, что хотите отфильтровать. Или же, Вы можете изменить язык на английский",
+        index: "Выберите действие. В этом же меню Вы можете изменить язык на английский",
         language: {
             message: "Выберите язык",
-            message_2: "Выбран язык: "
+            message_2: "Выбран язык"
         },
         interface: {
             message: "Выберите интерфейс",
@@ -124,7 +126,8 @@ module.exports = {
         main: "Выберите действие",
         help: {
             message: "Введите, чтобы начать поиск.",
-            text: "[ Get result ] - нажмите, чтобы получить результат \n\n" +
+            text: "[ Get result ] - нажмите, чтобы получить результат \n" +
+                "В случае, если ни один фильтр не выбран, будут показаны все мобы. \n\n" +
                 "[ Sort ] - нажмите, чтобы отсортировать результат по одной из сортировок. По умолчанию значения от наименьшего - к большему.\n" +
                 "При повторном нажатии на ту же сортировку, порядок будет изменён на от большего к меньшему.\n\n" +
                 "[ Select ] - нажмите, чтобы получить полную информацию о конкретном мобе из списка найденых. Вам необходимо будет ввести > id < - значение из первой колонки. \n\n" +
@@ -133,7 +136,7 @@ module.exports = {
                 "[ Stats ] - сбросит все статы.\n" +
                 "[ Skills ] - все скиллы. \n\n" +
                 "Вы можете использовать одновременно несколько фильтров, переключаясь по кнопкам. \n" +
-                "!Важно Фильтр [ Name ] может содержать только одно значение. Поиск осуществляется точным совпадением. \n" +
+                "!Важно Фильтр [ Name ] может содержать только _одно_ значение. Поиск осуществляется точным совпадением. \n" +
                 "В случае, если будет допущена опечатка - ничего не найдёт.\n" +
                 "Вводить имя или название нужно\n" +
                 "> только на английском языке <.\n" +
@@ -156,7 +159,7 @@ module.exports = {
             message: "Выберите тип фильтра. Повторное нажатие меняет порядок сортировки.\nПо умолчанию: от меньшего к большему."
         },
         getResult: "Ничего не найдено",
-        updateFilter: "Ваши фильтры",
+        updateFilter: "Чтобы получить результат, выберите Get Result\n\nВаши фильтры",
         monsters: {
             awaken: "Уровень пробуждения монстра",
             element: "Выберите элемент",
@@ -190,6 +193,7 @@ module.exports = {
             skillEffect: {
                 aoe: "Массовый или одиночный",
                 chance: "Шанс наложения эффекта",
+                dmg: "Наносит ли эффект скилла урон?",
                 filter: "Выбрать свойства эффекта скилла"
             },
             effect: {

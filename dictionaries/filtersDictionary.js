@@ -7,8 +7,8 @@ module.exports = {
             "baseStarsGte": "Мин. к-во звёзд",
             "baseStarsLte": "Макс. к-во звёзд",
             "awakenLevel": "Уровень пробуждения",
-            "baseSpeedGte": "Мин. спд.",
-            "baseSpeedLte": "Макс. спд.",
+            "speedGte": "Мин. спд.",
+            "speedLte": "Макс. спд.",
             "baseAttackGte": "Мин. атака",
             "baseAttackLte": "Макс. атака",
             "baseDefenseGte": "Мин. деф.",
@@ -30,6 +30,7 @@ module.exports = {
         },
         skillEffectsDictionary: {
             "aoe": "Аое",
+            "damage": "Наносит урон",
             "chance": "Шанс прохождения"
         },
         effectDictionary: {
@@ -73,6 +74,7 @@ module.exports = {
         },
         skillEffectsDictionary: {
             "aoe": "Аое",
+            "damage": "Deal damage",
             "chance": "Chance"
         },
         effectDictionary: {

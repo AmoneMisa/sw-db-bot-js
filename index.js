@@ -1,53 +1,63 @@
-const newInterfaceCallbacks = require('./newInterface');
-const languageCallback = require('./language');
-const interfaceCallback = require('./interface');
+const callbacks = require('./callbacks');
 const bot = require('./bot');
+const languageByChatId = require('./languageByChatId');
 const dictionary = require('./dictionaries/mainDictionary');
+const sendMessage = require('./functions/sendMessage');
 
 let sessions = {};
 
 bot.onText(/\/start/, (msg) => {
-    sessions[`${msg.chat.id}`] = {language: "ru", interface: "default"};
+    languageByChatId[msg.chat.id] = languageByChatId[msg.chat.id] || "ru";
 
-    bot.sendMessage(msg.chat.id, `${dictionary[sessions[`${msg.chat.id}`].language].index}`, {
+    sessions[msg.chat.id] = {
+        messages: [],
+        language: languageByChatId[msg.chat.id],
+        filter: {}
+    };
+
+    let session = sessions[msg.chat.id];
+
+    sendMessage(session, msg.chat.id, `${dictionary[session.language].index}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "Language",
                 callback_data: "language"
             }], [{
-                text: "Interface",
-                callback_data: "interface"
-            }], [{
-                text: "Monsters",
+                text: "Search Monsters",
                 callback_data: "monsters"
+            }, {
+                text: "Summon scrolls",
+                callback_data: "scrolls"
             }]]
         }
     });
 });
 
-let callbacks = [];
+bot.on('message', (msg) => {
+    let session = sessions[msg.chat.id];
 
-function addCallbacks(callbackArray) {
-    for (let item of callbackArray) {
-        callbacks.push(item);
+    if (!session) {
+        return;
     }
-}
 
-addCallbacks(languageCallback);
-addCallbacks(interfaceCallback);
-addCallbacks(newInterfaceCallbacks);
+    session.messages.push(msg.message_id);
+    console.log(session);
+});
 
 bot.on("callback_query", (callback) => {
-    let session = sessions[`${callback.message.chat.id}`];
+    let session = sessions[callback.message.chat.id];
+    let results = [];
 
     for (let [key, value] of callbacks) {
         if ((key instanceof RegExp && key.test(callback.data)) || callback.data === key) {
-            value(session, callback);
+            results.push(value(session, callback) || Promise.resolve());
         }
     }
 
-    bot.answerCallbackQuery(callback.id);
-    console.log(session);
+    Promise.all(results).then(() => {
+        bot.answerCallbackQuery(callback.id);
+        console.log(session);
+    });
 });
 
 bot.on('polling_error', (error) => {

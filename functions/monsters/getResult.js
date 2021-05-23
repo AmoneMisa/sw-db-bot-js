@@ -1,31 +1,21 @@
-const bot = require('../../bot');
 const fetchMonsters = require('./fetch/fetchMonsters');
-const fetchMonsterById = require('./fetch/fetchMonsterById');
 const formatMonsterItem = require('./format/formatMonsterItem');
-const sendMonster = require('./sendMonster');
+const formatFilterString = require('./format/formatFilterString');
 
-module.exports = function getResult(session, callback) {
+module.exports = function (session) {
     session.page = session.page || 0;
     session.sortBy = session.sortBy || undefined;
     session.sortAsc = session.sortAsc || undefined;
 
-    fetchMonsters({...session.filter, source: true}, session.page, session.sortBy, session.sortAsc)
+    return fetchMonsters({...session.filter, source: true}, session.page, session.sortBy, session.sortAsc)
         .then(r => {
+            let message = `${formatFilterString(session.filter, session.language)}\n\n`;
             if (r.data.totalElements === 0) {
-                bot.sendMessage(callback.message.chat.id, "Ничего не найдено");
-                return;
-            } else if (r.data.totalElements === 1) {
-                let monster = r.data.content[0];
-                fetchMonsterById(monster.id)
-                    .then((r) => {
-                        sendMonster(callback.message.chat.id, r.data);
-                    });
-                return;
-            }
-
-            let message = "";
-            for (let monster of r.data.content) {
-                message += formatMonsterItem(monster) + "\n";
+                message += "Ничего не найдено";
+            } else {
+                for (let monster of r.data.content) {
+                    message += formatMonsterItem(monster) + "\n";
+                }
             }
 
             let buttons = [];
@@ -44,21 +34,25 @@ module.exports = function getResult(session, callback) {
                 });
             }
 
-            bot.sendMessage(callback.message.chat.id, message, {
+            let form = {
                 reply_markup: {
-                    inline_keyboard: [buttons, [
-                        {
-                            text: "Select",
-                            callback_data: "monsters.by_id"
-                        }
-                    ], [
-                        {
-                            text: "Sort",
-                            callback_data: "monsters.result.sort"
-                        }
-                    ]]
+                    inline_keyboard: [buttons, [{
+                        text: "Select",
+                        callback_data: "monsters.by_id"
+                    }], [{
+                        text: "Sort",
+                        callback_data: "monsters.result.sort"
+                    }], [{
+                        text: "Filter",
+                        callback_data: "monsters.filter"
+                    }, {
+                        text: "Help",
+                        callback_data: "monsters.help"
+                    }]]
                 }
-            });
+            };
+
+            return {text: message, form: form};
         })
         .catch(e => console.error(e));
 };

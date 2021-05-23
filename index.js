@@ -11,7 +11,8 @@ bot.onText(/\/start/, (msg) => {
 
     sessions[msg.chat.id] = {
         messages: [],
-        language: languageByChatId[msg.chat.id]
+        language: languageByChatId[msg.chat.id],
+        filter: {}
     };
 
     let session = sessions[msg.chat.id];

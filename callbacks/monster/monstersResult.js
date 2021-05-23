@@ -1,23 +1,34 @@
 const bot = require('../../bot');
 const getResult = require('../../functions/monsters/getResult');
-const fetchAllMonsters = require('../../functions/monsters/fetch/fetchAllMonsters');
 const dictionary = require('../../dictionaries/mainDictionary');
+const sendMessage = require('../../functions/sendMessage');
+const deleteMessage = require('../../functions/deleteMessage');
 
-module.exports = [["monsters.result", function (session, callback) {
-    if (!session.filter) {
-        fetchAllMonsters(session, callback);
-        return;
-    }
-    getResult(session, callback);
-}], ["monsters.prev_page", function (session, callback) {
+module.exports = [["monsters.prev_page", function (session, callback) {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     session.page--;
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
-    getResult(session, callback);
+    return getResult(session)
+        .then(({text, form}) => {
+            return bot.editMessageText(text, {
+                ...form,
+                chat_id: callback.message.chat.id,
+                message_id: callback.message.message_id
+            });
+        });
 }], ["monsters.next_page", function (session, callback) {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     session.page++;
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
-    getResult(session, callback);
+    return getResult(session)
+        .then(({text, form}) => {
+            return bot.editMessageText(text, {
+                ...form,
+                chat_id: callback.message.chat.id,
+                message_id: callback.message.message_id
+            });
+        });
 }], ["monsters.result.sort", function (session, callback) {
+    deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
+    session.anchorMessageId = callback.message.message_id;
     let buildKeyboard = (buttons) => buttons.map(([text, callback]) => ({
         text: text, callback_data: `monsters.result.sort.${callback}`
     }));
@@ -29,8 +40,7 @@ module.exports = [["monsters.result", function (session, callback) {
         ["Spd", "speed"]
     ]].map(buildKeyboard);
 
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
-    bot.sendMessage(callback.message.chat.id, `${dictionary[session.language].result.message}`, {
+    return sendMessage(session, callback.message.chat.id, `${dictionary[session.language].result.message}`, {
         reply_markup: {
             inline_keyboard: buttons
         }
@@ -43,6 +53,13 @@ module.exports = [["monsters.result", function (session, callback) {
         session.sortAsc = true;
     }
     session.sortBy = sortBy;
-    bot.deleteMessage(callback.message.chat.id, callback.message.message_id);
-    getResult(session, callback);
+    deleteMessage(callback.message.chat.id, session.messages, session.anchorMessageId);
+    return getResult(session)
+        .then(({text, form}) => {
+            return bot.editMessageText(text, {
+                ...form,
+                chat_id: callback.message.chat.id,
+                message_id: session.anchorMessageId
+            });
+        });
 }]];

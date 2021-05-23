@@ -41,6 +41,7 @@ bot.on('message', (msg) => {
     }
 
     session.messages.push(msg.message_id);
+    console.log(msg.sticker);
     console.log(session);
 });
 

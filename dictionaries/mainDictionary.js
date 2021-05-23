@@ -22,17 +22,20 @@ module.exports = {
                 "You can use some filters at the same time switching by buttons\n" +
                 "!Important filter [ Name ] must have only one value. The search is performed by an exact match. \n" +
                 "If there is a typo, it will not find anything.\n" +
-                "You must enter name only in > *English* <.\n" +
+                "You must enter name only in > English <.\n" +
                 "You can enter with a small or capital letter, or a caps.\n\n" +
                 "The output of several monsters is displayed as: Name (or family name), base stars, element.\n" +
                 "The output of one monster contains: Name (or family name), base stars, element," +
-                "a brief description of skills (no description, only characteristics), a leader skill (if any).\n\n" +
+                "a brief description of skills (no description, only characteristics), a leader skill (if any).\n" +
+                "You can toggle between skills by buttons for showing info about selected skill\n\n" +
                 "When you choice effect's name, we'll recommend you choice the type firstly, for give you the most correct tip with names.\n" +
-                "In case if any type doesn't choice, full list with all names will show.\n\n" +
-                "After you get result, if you wanna start search again, you [ MUST ] start by /start command."
+                "In case if any type doesn't choice, full list with all names will show.\n\n"
         },
         filter: "Select filter to continue",
-        monstersById: "Enter id",
+        monstersById: {
+            message: "Enter id",
+            error: "Monster with this id does't found"
+        },
         reset: {
             message: "Select filter for reset.",
             filter: "Filter",
@@ -139,13 +142,16 @@ module.exports = {
                 "Вводить можно с маленькой или большой буквы, или капсом. \n\n" +
                 "Вывод нескольких мобов выводится в виде: Имя (или название семейства), базовое к-во звёзд, стихия.\n" +
                 "Вывод одного моба содержит: Имя (или название семейства), базовое к-во звёзд, стихию," +
-                " краткую характеристику скиллов (без описания, только характеристики), лидерку (если есть).\n\n" +
+                " краткую характеристику скиллов (без описания, только характеристики), лидерку (если есть).\n" +
+                "Вы можете переключаться кнопками между скиллами, чтобы прочесть информацию о каждом из них.\n\n" +
                 "При выборе названия эффекта, рекомендуем сначала выбрать его тип, чтобы предоставить более чёткую подсказку с названиями.\n" +
-                "В случае, если тип не выбран, будет показан список со всеми возможными эффектами.\n\n" +
-                "После получения результата, если Вы хотите начать поиск заново, [ОБЯЗАТЕЛЬНО] начинать с команды /start"
+                "В случае, если тип не выбран, будет показан список со всеми возможными эффектами.\n\n"
         },
         filter: "Выберите фильтр",
-        monstersById: "Введите id",
+        monstersById: {
+            message: "Введите id",
+            error: "Моба с таким id не найдено"
+        },
         reset: {
             message: "Выберите фильтр для сброса.",
             filter: "Фильтр",

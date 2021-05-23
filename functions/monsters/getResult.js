@@ -17,7 +17,7 @@ module.exports = function (session) {
             }
 
             if (r.data.totalElements === 0) {
-                message += "Ничего не найдено";
+                message += `${dictionary[session.language].getResult}`;
             } else {
                 for (let monster of r.data.content) {
                     message += formatMonsterItem(monster) + "\n";

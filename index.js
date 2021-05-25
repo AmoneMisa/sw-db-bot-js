@@ -49,7 +49,6 @@ bot.on('message', (msg) => {
     }
 
     session.messages.push(msg.message_id);
-    ;
     console.log(session);
 });
 

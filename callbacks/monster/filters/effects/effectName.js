@@ -10,7 +10,7 @@ module.exports = [["monsters.filter.type.skills.effects.effect.name", function (
     let effectsList = `${dictionary[session.language].monsters.effect.name}`;
     let type = session.filter.skills[0].effects[0].effect.type;
     if (type) {
-            effectsList += lists[type];
+        effectsList += lists[type];
     } else {
         effectsList += lists["neutral"];
         effectsList += lists["debuff"];

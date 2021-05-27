@@ -1,6 +1,6 @@
 const bot = require('../../bot');
 const fetchMonsterById = require('../../functions/monsters/fetch/fetchMonsterById');
-const dictionary = require('../../dictionaries/mainDictionary');
+const dictionary = require('../../dictionaries/main');
 const sendMonster = require('../../functions/monsters/sendMonster');
 const sendMessage = require('../../functions/sendMessage');
 const deleteMessage = require('../../functions/deleteMessage');

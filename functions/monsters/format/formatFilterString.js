@@ -1,4 +1,4 @@
-const dictionary = require('../../../dictionaries/filtersDictionary');
+const dictionary = require('../../../dictionaries/filters');
 
 function forEach(obj, dictionary) {
     let string = "";

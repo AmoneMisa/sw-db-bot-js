@@ -1,7 +1,7 @@
 const fetchMonsters = require('./fetch/fetchMonsters');
 const formatMonsterItem = require('./format/formatMonsterItem');
 const formatFilterString = require('./format/formatFilterString');
-const dictionary = require('../../dictionaries/mainDictionary');
+const dictionary = require('../../dictionaries/main');
 
 module.exports = function (session) {
     session.page = session.page || 0;

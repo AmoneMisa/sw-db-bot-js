@@ -1,6 +1,6 @@
 const sendMessage = require('../../functions/sendMessage');
 const deleteMessage = require('../../functions/deleteMessage');
-const dictionary = require('../../dictionaries/mainDictionary');
+const dictionary = require('../../dictionaries/main');
 
 module.exports = [["scrolls", function (session, callback) {
     deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);

@@ -1,5 +1,5 @@
 const updateFilter = require('../../../../functions/monsters/updateFilter');
-const dictionary = require('../../../../dictionaries/mainDictionary');
+const dictionary = require('../../../../dictionaries/main');
 const sendMessage = require('../../../../functions/sendMessage');
 const deleteMessage = require('../../../../functions/deleteMessage');
 
@@ -14,8 +14,8 @@ let filters = {
     "max_hp": "MAX HP",
     "missing_hp": "Missing HP",
     "current_hp": "Current HP",
-    "current_hp_percent": "Current HP %",
-    "target_current_hp_percent": "Target Current HP %",
+    "curr_hp_perc": "Current HP %",
+    "target_curr_hp_perc": "Target Current HP %",
     "surviving_allies": "Surviving Allies",
     "living_ally": "Living Ally %",
     "alive_allies": "Alive Allies %",
@@ -76,9 +76,9 @@ module.exports = [["monsters.filter.type.skills.scales_with", function (session,
         ["Max HP", "max_hp"],
         ["Missing HP", "missing_hp"],
     ], [
-        ["Current HP", "current_hp"],
-        ["Current HP %", "current_hp_percent"],
-        ["Target Current HP %", "target_current_hp_percent"]
+        ["Current HP", "curr_hp"],
+        ["Current HP %", "curr_hp_perc"],
+        ["Target Current HP %", "target_curr_hp_perc"]
     ]].map(buildKeyboard);
 
     sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.scalesWith}`, {

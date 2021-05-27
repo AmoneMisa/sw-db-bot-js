@@ -1,9 +1,12 @@
 const sendMessage = require('../../functions/sendMessage');
 const deleteMessage = require('../../functions/deleteMessage');
-const dictionary = require('../../dictionaries/mainDictionary');
+const dictionary = require('../../dictionaries/main');
 
 module.exports = [["scrolls", function (session, callback) {
     deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
+    session.anchorMessageId = callback.message.message_id;
+    session.scrolls = session.scrolls || {};
+
     sendMessage(session, callback.message.chat.id, `${dictionary[session.language].main}`, {
         reply_markup: {
             inline_keyboard: [[{
@@ -36,6 +39,9 @@ module.exports = [["scrolls", function (session, callback) {
             }, {
                 text: "Light & Dark Scroll",
                 callback_data: "scrolls.ld_scroll"
+            }], [{
+                text: "Count of summons",
+                callback_data: "scrolls.count"
             }]]
         }
     });

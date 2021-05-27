@@ -1,5 +1,5 @@
 const bot = require('../bot');
-const dictionary = require('../dictionaries/mainDictionary');
+const dictionary = require('../dictionaries/main');
 const languageByChatId = require('../languageByChatId');
 const sendMessage = require('../functions/sendMessage');
 const deleteMessage = require('../functions/deleteMessage');

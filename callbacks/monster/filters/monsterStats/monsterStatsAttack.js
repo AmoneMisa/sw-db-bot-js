@@ -1,6 +1,6 @@
 const bot = require('../../../../bot');
 const updateFilter = require('../../../../functions/monsters/updateFilter');
-const dictionary = require('../../../../dictionaries/mainDictionary');
+const dictionary = require('../../../../dictionaries/main');
 const sendMessage = require('../../../../functions/sendMessage');
 const deleteMessage = require('../../../../functions/deleteMessage');
 

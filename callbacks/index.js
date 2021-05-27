@@ -1,9 +1,11 @@
 const monstersCallbacks = require('./monster');
+const scrollsCallbacks = require('./scrolls');
 const languageCallback = require('./language');
-const fuckYou = require('./rat');
+const rat = require('./rat');
 
 module.exports = [
     ...monstersCallbacks,
     ...languageCallback,
-    ...fuckYou
+    ...scrollsCallbacks,
+    ...rat
 ];

@@ -41,6 +41,9 @@ module.exports = [["language", function (session, callback) {
             }], [{
                 text: "Search Monsters",
                 callback_data: "monsters"
+            }, {
+                text: "Summon scrolls",
+                callback_data: "scrolls"
             }], [{
                 text: "Ля ты крыса (Monkey)",
                 callback_data: "rat"

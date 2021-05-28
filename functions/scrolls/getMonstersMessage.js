@@ -6,7 +6,10 @@ module.exports = function (session) {
     session.scrolls.page = session.scrolls.page || 0;
     let monsters = session.scrolls.monsters.slice(session.scrolls.page * pageSize, (session.scrolls.page + 1) * pageSize);
     let countPages = Math.ceil(session.scrolls.monsters.length / 25);
-    let info = `${session.language === "ru" ? 'Количество свитков' : 'Count scrolls'}: ${session.scrolls.stats.total}\n5*:  ${session.scrolls.stats[5] || 0} | 4*:  ${session.scrolls.stats[4] || 0} | 3*:  ${session.scrolls.stats[3] || 0}\n\n`;
+    let info = `${session.language === "ru" ? 'Количество свитков' : 'Count scrolls'}: ${session.scrolls.stats.total}
+5*:  ${session.scrolls.stats[5] || 0}
+4*:  ${session.scrolls.stats[4] || 0}
+3*:  ${session.scrolls.stats[3] || 0}\n\n`;
 
     if (session.scrolls.page > 0) {
         buttons.push({

@@ -113,6 +113,10 @@ module.exports = {
                 resistance: "Choose a value.",
                 criRate: "Choose a value."
             }
+        },
+        scrolls: {
+            main: "Select a summon scroll. Here you can set a count of summons.",
+            count: "How much summons do you want? Min 1, max 100. There are 25 monsters per page."
         }
     }, "ru": {
         index: "Выберите действие. В этом же меню Вы можете изменить язык на английский",
@@ -229,6 +233,10 @@ module.exports = {
                 resistance: "Выберите значение.",
                 criRate: "Выберите значение."
             }
+        },
+        scrolls: {
+            main: "Выберите свиток для призыва. Здесь же вы можете указать к-во призывов.",
+            count: "Сколько вы хотите сделать призывов за раз? Минимум 1, максимум 100. На одной странице отображается 25 мобов."
         }
     }
 };

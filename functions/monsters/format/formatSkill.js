@@ -4,6 +4,7 @@ module.exports = function (skill) {
     let skillString = "";
 
     skillString += `- Slot: ${skill.slot} -
+${skill.description}\n
 Cooltime: ${skill.cooltime} | Hits: ${skill.hits} | Max lvl: ${skill.maxLevel}\n`;
 
     if (skill.scalesWith && skill.scalesWith.length) {

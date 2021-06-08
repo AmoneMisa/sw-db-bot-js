@@ -9,7 +9,7 @@ module.exports = [["monsters.filter.type.skills.effects.chance", function (sessi
         text: skill, callback_data: `monsters.filter.type.skills.effects.chance.${skill.toLowerCase()}`
     }));
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skillEffect.chance}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.skillEffect.chance}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["0", "325", "165", "100"]),

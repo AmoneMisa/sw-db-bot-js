@@ -1,6 +1,7 @@
 const bot = require('../../bot');
 const updateFilter = require('../../functions/monsters/updateFilter');
 const dictionary = require('../../dictionaries/main');
+const buttonsDictionary = require('../../dictionaries/buttons');
 const sendMessage = require('../../functions/sendMessage');
 const deleteMessage = require('../../functions/deleteMessage');
 
@@ -12,21 +13,21 @@ module.exports = [["monsters.reset", function (session, callback) {
     }));
 
     let buttons = [[
-        ["All", "all"],
-        ["Name", "name"],
-        ["Element", "element"],
-        ["Awaken", "awaken"]
+        [buttonsDictionary[session.language.buttons].all, "all"],
+        [buttonsDictionary[session.language.buttons].name, "name"],
+        [buttonsDictionary[session.language.buttons].element, "element"],
+        [buttonsDictionary[session.language.buttons].awaken, "awaken"]
     ], [
-        ["Archetype", "type"],
-        ["Base stars", "baseStars"],
-        ["Leader skill", "leaderSkill"]
+        [buttonsDictionary[session.language.buttons].type, "type"],
+        [buttonsDictionary[session.language.buttons].baseStars, "baseStars"],
+        [buttonsDictionary[session.language.buttons].leaderSkill, "leaderSkill"]
     ], [
-        ["Stats", "stats"],
-        ["Skills", "skills"],
-        ["Is fusion food", "isFusionFood"]
+        [buttonsDictionary[session.language.buttons].stats, "stats"],
+        [buttonsDictionary[session.language.buttons].skills, "skills"],
+        [buttonsDictionary[session.language.buttons].isFusionFood, "isFusionFood"]
     ]].map(buildKeyboard);
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].reset.message}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].reset.message}`, {
         reply_markup: {
             inline_keyboard: buttons
         }
@@ -55,7 +56,7 @@ module.exports = [["monsters.reset", function (session, callback) {
         delete session.filter[reset];
     }
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].reset.filter} ${reset} ${dictionary[session.language].reset.message_2}`)
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].reset.filter} ${reset} ${dictionary[session.language.text].reset.message_2}`)
         .then(msg => {
                 bot.deleteMessage(msg.chat.id, msg.message_id);
                 bot.deleteMessage(callback.message.chat.id, callback.message.message_id);

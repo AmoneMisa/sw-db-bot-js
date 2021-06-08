@@ -1,5 +1,6 @@
 const updateFilter = require('../../../../functions/monsters/updateFilter');
 const dictionary = require('../../../../dictionaries/main');
+const buttonsDictionary = require('../../../../dictionaries/buttons');
 const sendMessage = require('../../../../functions/sendMessage');
 const deleteMessage = require('../../../../functions/deleteMessage');
 
@@ -7,16 +8,18 @@ module.exports = [["monsters.filter.type.skills.aoe", function (session, callbac
     deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     session.anchorMessageId = callback.message.message_id;
 
-    let buildKeyboard = (skills) => skills.map(skill => ({
-        text: skill, callback_data: `monsters.filter.type.skills.aoe.${skill.toLowerCase()}`
+    let buildKeyboard =  (skills) => skills.map(([text, callback]) => ({
+        text: text, callback_data: `monsters.filter.type.skills.aoe.${callback}`
     }));
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.aoe}`, {
+    let buttons = [[
+        [buttonsDictionary[session.language.buttons].aoe, "aoe"],
+        [buttonsDictionary[session.language.buttons].single, "single"]
+    ]].map(buildKeyboard);
+
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.skills.aoe}`, {
         reply_markup: {
-            inline_keyboard: [
-                buildKeyboard(["Aoe"]),
-                buildKeyboard(["Single"])
-            ]
+            inline_keyboard: buttons
         }
     });
 }], [/^monsters\.filter\.type\.skills\.aoe\./, function (session, callback) {

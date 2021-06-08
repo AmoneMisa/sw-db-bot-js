@@ -6,7 +6,7 @@ const dictionary = require('../../dictionaries/main');
 module.exports = [["scrolls.count", function (session, callback) {
     deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     session.anchorScrollsMessageId = callback.message.message_id;
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].scrolls.count}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].scrolls.count}`, {
         reply_markup: {
             force_reply: true
         }

@@ -8,8 +8,7 @@ module.exports = [["scrolls", function (session, callback) {
     session.scrolls = session.scrolls || {};
     session.scrolls.counter = session.scrolls.counter || 1;
 
-    console.log(session.language);
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].scrolls.main}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].scrolls.main}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "Mystic Scroll",

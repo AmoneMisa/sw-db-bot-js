@@ -7,7 +7,7 @@ module.exports = [["monsters.filter.type.stats.cri_rate", function (session, cal
     deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     session.anchorMessageId = callback.message.message_id;
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.stats.criRate}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.stats.criRate}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "15%",

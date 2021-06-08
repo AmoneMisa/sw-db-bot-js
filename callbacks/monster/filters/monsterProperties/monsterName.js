@@ -8,7 +8,7 @@ module.exports = [["monsters.filter.type.name", function (session, callback) {
     deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     session.anchorMessageId = callback.message.message_id;
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.name}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.name}`, {
         reply_markup: {
             force_reply: true
         }

@@ -11,7 +11,7 @@ module.exports = [["monsters.filter.type.skills.cooltime", function (session, ca
         text: skill, callback_data: `monsters.filter.type.skills.cooltime.${skill.toLowerCase()}`
     }));
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.cooltime}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.skills.cooltime}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["0", "1", "2", "3"]),

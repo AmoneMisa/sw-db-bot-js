@@ -9,7 +9,7 @@ const formatSkill = require('../../functions/monsters/format/formatSkill');
 module.exports = [["monsters.by_id", function (session, callback) {
     deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     session.anchorMessageId = callback.message.message_id;
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monstersById.message}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monstersById.message}`, {
         reply_markup: {
             force_reply: true
         }
@@ -28,7 +28,7 @@ module.exports = [["monsters.by_id", function (session, callback) {
                             .then(msg => {
                                 session.messages.push(msg.message_id);
                             });
-                        sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monstersById.error}`, {
+                        sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monstersById.error}`, {
                             reply_markup: {
                                 inline_keyboard: [[{
                                     text: "Close",

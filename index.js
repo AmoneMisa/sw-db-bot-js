@@ -2,6 +2,7 @@ const callbacks = require('./callbacks');
 const bot = require('./bot');
 const languageByChatId = require('./languageByChatId');
 const dictionary = require('./dictionaries/main');
+const buttonsDictionary = require('./dictionaries/buttons');
 const sendMessage = require('./functions/sendMessage');
 const fs = require('fs');
 
@@ -19,22 +20,25 @@ bot.onText(/\/start/, (msg) => {
 
     sessions[msg.chat.id] = {
         messages: [],
-        language: languageByChatId[msg.chat.id],
+        language: {
+            text: languageByChatId[msg.chat.id],
+            buttons: languageByChatId[msg.chat.id]
+        },
         filter: {}
     };
 
     let session = sessions[msg.chat.id];
 
-    sendMessage(session, msg.chat.id, `${dictionary[session.language].index}`, {
+    sendMessage(session, msg.chat.id, `${dictionary[session.language.text].index}`, {
         reply_markup: {
             inline_keyboard: [[{
-                text: "Language",
+                text: buttonsDictionary[session.language.buttons].language,
                 callback_data: "language"
             }], [{
-                text: "Search Monsters",
+                text: buttonsDictionary[session.language.buttons].search,
                 callback_data: "monsters"
             }, {
-                text: "Summon scrolls",
+                text: buttonsDictionary[session.language.buttons].summon,
                 callback_data: "scrolls"
             }], [{
                 text: "Ля ты крыса (Monkey)",

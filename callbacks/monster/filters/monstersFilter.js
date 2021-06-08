@@ -1,4 +1,5 @@
 const dictionary = require('../../../dictionaries/main');
+const buttonsDictionary = require('../../../dictionaries/buttons');
 const sendMessage = require('../../../functions/sendMessage');
 const deleteMessage = require('../../../functions/deleteMessage');
 
@@ -10,22 +11,22 @@ module.exports = [["monsters.filter", function (session, callback) {
     }));
 
     let buttons = [[
-        ["Name", "filter.type.name"],
-        ["Element", "filter.type.element"],
-        ["Awaken", "filter.type.awaken"]
+        [buttonsDictionary[session.language.buttons].name, "filter.type.name"],
+        [buttonsDictionary[session.language.buttons].element, "filter.type.element"],
+        [buttonsDictionary[session.language.buttons].awaken, "filter.type.awaken"]
     ], [
-        ["Archetype", "filter.type.type"],
-        ["Base stars", "filter.type.base_stars"],
-        ["Leader skill", "filter.type.leader_skill"]
+        [buttonsDictionary[session.language.buttons].type, "filter.type.type"],
+        [buttonsDictionary[session.language.buttons].baseStars, "filter.type.base_stars"],
+        [buttonsDictionary[session.language.buttons].leaderSkill, "filter.type.leader_skill"]
     ], [
-        ["Stats", "filter.type.stats"],
-        ["Skills", "filter.type.skills"],
-        ["Is fusion food", "filter.type.is_fusion_food"]
+        [buttonsDictionary[session.language.buttons].stats, "filter.type.stats"],
+        [buttonsDictionary[session.language.buttons].skills, "filter.type.skills"],
+        [buttonsDictionary[session.language.buttons].isFusionFood, "filter.type.is_fusion_food"]
     ], [
-        ["Reset", "reset"]
+        [buttonsDictionary[session.language.buttons].reset, "reset"]
     ]].map(buildKeyboard);
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].filter}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].filter}`, {
         reply_markup: {
             inline_keyboard: buttons
         }

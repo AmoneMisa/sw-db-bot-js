@@ -1,6 +1,7 @@
 const dictionary = require('../../../../dictionaries/main');
 const sendMessage = require('../../../../functions/sendMessage');
 const deleteMessage = require('../../../../functions/deleteMessage');
+const buttonsDictionary = require('../../../../dictionaries/buttons');
 
 module.exports = [["monsters.filter.type.stats", function (session, callback) {
     deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
@@ -9,18 +10,18 @@ module.exports = [["monsters.filter.type.stats", function (session, callback) {
     }));
 
     let buttons = [[
-        ["Attack", "attack"],
-        ["Defense", "defense"],
-        ["HP", "hp"],
+        [buttonsDictionary[session.language.buttons].attack, "attack"],
+        [buttonsDictionary[session.language.buttons].defense, "defense"],
+        [buttonsDictionary[session.language.buttons].hp, "hp"],
     ], [
-        ["Speed", "spd"],
-        ["Accuracy", "accuracy"]
+        [buttonsDictionary[session.language.buttons].spd, "spd"],
+        [buttonsDictionary[session.language.buttons].accuracy, "accuracy"]
     ], [
-        ["Resistance", "resistance"],
-        ["Critical Rate", "cri_rate"]
+        [buttonsDictionary[session.language.buttons].resistance, "resistance"],
+        [buttonsDictionary[session.language.buttons].criRate, "cri_rate"]
     ]].map(buildKeyboard);
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.stats.filter}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.stats.filter}`, {
         reply_markup: {
             inline_keyboard: buttons
         }

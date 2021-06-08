@@ -1,1 +1,1 @@
-module.exports = {};
+module.exports = {text: null, buttons: null};

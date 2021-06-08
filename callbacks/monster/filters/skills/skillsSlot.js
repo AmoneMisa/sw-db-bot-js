@@ -10,7 +10,7 @@ module.exports = [["monsters.filter.type.skills.slot", function (session, callba
     let buildKeyboard = (skills) => skills.map(skill => ({
         text: skill, callback_data: `monsters.filter.type.skills.slot.${skill.toLowerCase()}`
     }));
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.slot}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.skills.slot}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["1", "2"]),

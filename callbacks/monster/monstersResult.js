@@ -1,6 +1,7 @@
 const bot = require('../../bot');
 const getResult = require('../../functions/monsters/getResult');
 const dictionary = require('../../dictionaries/main');
+const buttonsDictionary = require('../../dictionaries/buttons');
 const sendMessage = require('../../functions/sendMessage');
 const deleteMessage = require('../../functions/deleteMessage');
 
@@ -34,13 +35,13 @@ module.exports = [["monsters.prev_page", function (session, callback) {
     }));
 
     let buttons = [[
-        ["Attack", "maxAttack"],
-        ["Defense", "maxDefense"],
-        ["HP", "maxHp"],
-        ["Spd", "speed"]
+        [buttonsDictionary[session.language.buttons].attack, "maxAttack"],
+        [buttonsDictionary[session.language.buttons].defense, "maxDefense"],
+        [buttonsDictionary[session.language.buttons].hp, "maxHp"],
+        [buttonsDictionary[session.language.buttons].spd, "speed"]
     ]].map(buildKeyboard);
 
-    return sendMessage(session, callback.message.chat.id, `${dictionary[session.language].result.message}`, {
+    return sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].result.message}`, {
         reply_markup: {
             inline_keyboard: buttons
         }

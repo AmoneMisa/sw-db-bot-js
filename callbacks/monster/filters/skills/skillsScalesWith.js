@@ -1,5 +1,6 @@
 const updateFilter = require('../../../../functions/monsters/updateFilter');
 const dictionary = require('../../../../dictionaries/main');
+const buttonsDictionary = require('../../../../dictionaries/buttons');
 const sendMessage = require('../../../../functions/sendMessage');
 const deleteMessage = require('../../../../functions/deleteMessage');
 
@@ -33,17 +34,17 @@ module.exports = [["monsters.filter.type.skills.scales_with", function (session,
     }));
 
     let buttons = [[
-        ["Attack", "atk"],
-        ["Defense", "def"],
-        ["Attacker's Level", "attackers_level"]
+        [buttonsDictionary[session.language.buttons].attack, "atk"],
+        [buttonsDictionary[session.language.buttons].defense, "def"],
+        [buttonsDictionary[session.language.buttons].attackersLevel, "attackers_level"]
     ], [
-        ["Speed", "_spd"],
-        ["HP", "_hp"]
+        [buttonsDictionary[session.language.buttons].spd, "_spd"],
+        [buttonsDictionary[session.language.buttons].hp, "_hp"]
     ], [
-        ["Alive", "_alive"],
-        ["Life share", "_life_share"]
+        [buttonsDictionary[session.language.buttons].alive, "_alive"],
+        [buttonsDictionary[session.language.buttons].lifeShare, "_life_share"]
     ]].map(buildKeyboard);
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.scalesWith}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.skills.scalesWith}`, {
         reply_markup: {
             inline_keyboard: buttons
         }
@@ -55,12 +56,12 @@ module.exports = [["monsters.filter.type.skills.scales_with", function (session,
     }));
 
     let buttons = [[
-        ["Target SPD", "target_spd"],
-        ["Relative SPD", "relative_spd"],
-        ["Speed", "spd"]
+        [buttonsDictionary[session.language.buttons].targetSpd, "target_spd"],
+        [buttonsDictionary[session.language.buttons].relativeSpd, "relative_spd"],
+        [buttonsDictionary[session.language.buttons].spd, "spd"]
     ]].map(buildKeyboard);
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.scalesWith}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.skills.scalesWith}`, {
         reply_markup: {
             inline_keyboard: buttons
         }
@@ -72,16 +73,16 @@ module.exports = [["monsters.filter.type.skills.scales_with", function (session,
     }));
 
     let buttons = [[
-        ["Target Max HP", "target_max_hp"],
-        ["Max HP", "max_hp"],
-        ["Missing HP", "missing_hp"],
+        [buttonsDictionary[session.language.buttons].targetMaxHp, "target_max_hp"],
+        [buttonsDictionary[session.language.buttons].maxHp, "max_hp"],
+        [buttonsDictionary[session.language.buttons].missingHp, "missing_hp"],
     ], [
-        ["Current HP", "curr_hp"],
-        ["Current HP %", "curr_hp_perc"],
-        ["Target Current HP %", "target_curr_hp_perc"]
+        [buttonsDictionary[session.language.buttons].currentHp, "curr_hp"],
+        [buttonsDictionary[session.language.buttons].currentHpPercent, "curr_hp_perc"],
+        [buttonsDictionary[session.language.buttons].targetCurrentHpPercent, "target_curr_hp_perc"]
     ]].map(buildKeyboard);
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.scalesWith}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.skills.scalesWith}`, {
         reply_markup: {
             inline_keyboard: buttons
         }
@@ -93,14 +94,14 @@ module.exports = [["monsters.filter.type.skills.scales_with", function (session,
     }));
 
     let buttons = [[
-        ["Surviving Allies", "surviving_allies"],
-        ["Living Ally %", "living_ally"]
+        [buttonsDictionary[session.language.buttons].survivingAllies, "surviving_allies"],
+        [buttonsDictionary[session.language.buttons].livingAllyPercent, "living_ally"]
     ], [
-        ["Alive Allies %", "alive_allies"],
-        ["Alive Enemies", "alive_enemies"]
+        [buttonsDictionary[session.language.buttons].aliveAlliesPercent, "alive_allies"],
+        [buttonsDictionary[session.language.buttons].aliveEnemies, "alive_enemies"]
     ]].map(buildKeyboard);
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.scalesWith}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.skills.scalesWith}`, {
         reply_markup: {
             inline_keyboard: buttons
         }
@@ -112,11 +113,11 @@ module.exports = [["monsters.filter.type.skills.scales_with", function (session,
     }));
 
     let buttons = [[
-        ["Life Share", "life_share"],
-        ["Life Share (AOE)", "life_share_aoe"]
+        [buttonsDictionary[session.language.buttons].lifeShare, "life_share"],
+        [buttonsDictionary[session.language.buttons].lifeShareAoe, "life_share_aoe"]
     ]].map(buildKeyboard);
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.scalesWith}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.skills.scalesWith}`, {
         reply_markup: {
             inline_keyboard: buttons
         }

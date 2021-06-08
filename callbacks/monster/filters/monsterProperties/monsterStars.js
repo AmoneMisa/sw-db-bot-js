@@ -1,5 +1,6 @@
 const updateFilter = require('../../../../functions/monsters/updateFilter');
 const dictionary = require('../../../../dictionaries/main');
+const buttonsDictionary = require('../../../../dictionaries/buttons');
 const sendMessage = require('../../../../functions/sendMessage');
 const deleteMessage = require('../../../../functions/deleteMessage');
 
@@ -7,13 +8,13 @@ module.exports = [["monsters.filter.type.base_stars", function (session, callbac
     deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     session.anchorMessageId = callback.message.message_id;
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.stars.message}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.stars.message}`, {
         reply_markup: {
             inline_keyboard: [[{
-                text: "Greater than",
+                text: buttonsDictionary[session.language.buttons].gte,
                 callback_data: "monsters.filter.type.base_stars.gte"
             }, {
-                text: "Less than",
+                text: buttonsDictionary[session.language.buttons].lte,
                 callback_data: "monsters.filter.type.base_stars.lte"
             }]]
         }
@@ -23,7 +24,7 @@ module.exports = [["monsters.filter.type.base_stars", function (session, callbac
     let buildKeyboard = (stars) => stars.map(star => ({
         text: star, callback_data: `monsters.filter.type.base_stars.gte.${star.toLowerCase()}`
     }));
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.stars.gte}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.stars.gte}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["1", "2", "3"]),
@@ -36,7 +37,7 @@ module.exports = [["monsters.filter.type.base_stars", function (session, callbac
     let buildKeyboard = (stars) => stars.map(star => ({
         text: star, callback_data: `monsters.filter.type.base_stars.lte.${star.toLowerCase()}`
     }));
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.stars.lte}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.stars.lte}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["1", "2", "3"]),

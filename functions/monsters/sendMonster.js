@@ -1,6 +1,7 @@
 const bot = require('../../bot');
 const formatMonster = require('./format/formatMonster');
 const sendMessage = require('../../functions/sendMessage');
+const buttonsDictionary = require('../../dictionaries/buttons');
 
 module.exports = function (session, chatId, monster) {
     bot.sendPhoto(chatId,
@@ -27,7 +28,7 @@ module.exports = function (session, chatId, monster) {
                     buttons.push(row);
                 }
 
-                row.push({text: `Skill ${i + 1}`, callback_data: `monsters.by_id.skill.${i}`});
+                row.push({text: `${buttonsDictionary[session.language.buttons].skill} ${i + 1}`, callback_data: `monsters.by_id.skill.${i}`});
             }
 
             sendMessage(session, chatId, formatMonster(monster), {
@@ -35,7 +36,7 @@ module.exports = function (session, chatId, monster) {
                     inline_keyboard: [
                         ...buttons,
                         [{
-                        text: "Close",
+                        text: buttonsDictionary[session.language.buttons].close,
                         callback_data: "monsters.by_id.close"
                     }]]
                 }

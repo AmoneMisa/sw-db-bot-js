@@ -12,15 +12,15 @@ module.exports = {
         main: "Choose what you want to do",
         help: {
             message: "Enter for start search",
-            text: "[ Sort ] - push for sort result by one of sorting. Default value from lowest to highest\n" +
+            text: "[ Sort ] || [ Сортировать ] - push for sort result by one of sorting. Default value from lowest to highest\n" +
                 "When you click on the same sort again, the order will be changed from larger to smaller.\n\n" +
-                "[ Select ] - push for get result about specific monster from monsters' result list. You should enter the > id < - value from first column. \n\n" +
-                "[ Reset ] - push for reset filters. \n" +
+                "[ Select ] || [ Выбрать ] - push for get result about specific monster from monsters' result list. You should enter the > id < - value from first column. \n\n" +
+                "[ Reset ] || [ Сбросить ] - push for reset filters. \n" +
                 "You can reset all at the same time or partially.\n" +
-                "[ Stats ] - reset all stats.\n" +
-                "[ Skills ] - reset all skills. \n\n" +
+                "[ Stats ] || [ Статы ] - reset all stats.\n" +
+                "[ Skills ] || [ Скиллы ] - reset all skills. \n\n" +
                 "You can use some filters at the same time switching by buttons\n" +
-                "!Important filter [ Name ] must have only one value. The search is performed by an exact match. \n" +
+                "!Important filter [ Name ] || [ Название ] must have only one value. The search is performed by an exact match. \n" +
                 "If there is a typo, it will not find anything.\n" +
                 "You must enter name only in > English <.\n" +
                 "You can enter with a small or capital letter, or a caps.\n\n" +
@@ -131,15 +131,15 @@ module.exports = {
         main: "Выберите действие",
         help: {
             message: "Введите, чтобы начать поиск.",
-            text: "[ Sort ] - нажмите, чтобы отсортировать результат по одной из сортировок. По умолчанию значения от наименьшего - к большему.\n" +
+            text: "[ Sort ] || [ Сортировать ]- нажмите, чтобы отсортировать результат по одной из сортировок. По умолчанию значения от наименьшего - к большему.\n" +
                 "При повторном нажатии на ту же сортировку, порядок будет изменён на от большего к меньшему.\n\n" +
-                "[ Select ] - нажмите, чтобы получить полную информацию о конкретном мобе из списка найденых. Вам необходимо будет ввести > id < - значение из первой колонки. \n\n" +
-                "[ Reset ] - Нажмите, чтобы сбросить фильтры. \n" +
+                "[ Select ] || [ Выбрать ] - нажмите, чтобы получить полную информацию о конкретном мобе из списка найденых. Вам необходимо будет ввести > id < - значение из первой колонки. \n\n" +
+                "[ Reset ] || [ Сбросить ] - Нажмите, чтобы сбросить фильтры. \n" +
                 "Вы можете сбросить все одновременно, либо очистить по-отдельности. \n" +
-                "[ Stats ] - сбросит все статы.\n" +
-                "[ Skills ] - все скиллы. \n\n" +
+                "[ Stats ] || [ Статы ] - сбросит все статы.\n" +
+                "[ Skills ] || [ Скиллы ] - все скиллы. \n\n" +
                 "Вы можете использовать одновременно несколько фильтров, переключаясь по кнопкам. \n" +
-                "!Важно Фильтр [ Name ] может содержать только одно значение. Поиск осуществляется точным совпадением. \n" +
+                "!Важно Фильтр [ Name ] || [ Название ] может содержать только одно значение. Поиск осуществляется точным совпадением. \n" +
                 "В случае, если будет допущена опечатка - ничего не найдёт.\n" +
                 "Вводить имя или название нужно\n" +
                 "> только на английском языке <.\n" +

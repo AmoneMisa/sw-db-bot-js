@@ -1,4 +1,5 @@
 const formatMonsterItem = require('../../functions/monsters/format/formatMonsterItem');
+const buttonsDictionary = require('../../dictionaries/buttons');
 
 module.exports = function (session) {
     let buttons = [];
@@ -6,21 +7,21 @@ module.exports = function (session) {
     session.scrolls.page = session.scrolls.page || 0;
     let monsters = session.scrolls.monsters.slice(session.scrolls.page * pageSize, (session.scrolls.page + 1) * pageSize);
     let countPages = Math.ceil(session.scrolls.monsters.length / 25);
-    let info = `${session.language === "ru" ? 'Количество свитков' : 'Count scrolls'}: ${session.scrolls.stats.total}
+    let info = `${session.language.text === "ru" ? 'Количество свитков' : 'Count scrolls'}: ${session.scrolls.stats.total}
 5*:  ${session.scrolls.stats[5] || 0}
 4*:  ${session.scrolls.stats[4] || 0}
 3*:  ${session.scrolls.stats[3] || 0}\n\n`;
 
     if (session.scrolls.page > 0) {
         buttons.push({
-            text: "Prev page",
+            text: buttonsDictionary[session.language.buttons].prevPage,
             callback_data: "scrolls.prev_page"
         });
     }
 
     if ((session.scrolls.page + 1) < countPages) {
         buttons.push({
-            text: "Next page",
+            text: buttonsDictionary[session.language.buttons].nextPage,
             callback_data: "scrolls.next_page"
         });
     }
@@ -36,16 +37,16 @@ module.exports = function (session) {
         reply_markup: {
             inline_keyboard: [buttons,
                 [{
-                    text: "Close",
+                    text: buttonsDictionary[session.language.buttons].close,
                     callback_data: "scrolls.close"
                 }, {
-                    text: "Try again",
+                    text: buttonsDictionary[session.language.buttons].tryAgain,
                     callback_data: "scrolls.again"
                 }, {
-                    text: "Select",
+                    text: buttonsDictionary[session.language.buttons].select,
                     callback_data: "monsters.by_id"
                 }], [{
-                    text: "Reset stats",
+                    text: buttonsDictionary[session.language.buttons].resetStats,
                     callback_data: "scrolls.reset_stats"
                 }]]
         }

@@ -11,7 +11,7 @@ module.exports = [["monsters.filter.type.leader_skill.amount", function (session
         text: leaderSkill, callback_data: `monsters.filter.type.leader_skill.amount.${leaderSkill.toLowerCase()}`
     }));
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.leaderSkill.amount}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.leaderSkill.amount}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["10", "13", "15", "16"]),

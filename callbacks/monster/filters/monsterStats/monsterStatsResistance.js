@@ -7,7 +7,7 @@ module.exports = [["monsters.filter.type.stats.resistance", function (session, c
     deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
     session.anchorMessageId = callback.message.message_id;
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.stats.resistance}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.stats.resistance}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "15%",

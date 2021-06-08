@@ -10,7 +10,7 @@ module.exports = [["monsters.filter.type.skills.hits", function (session, callba
         text: skill, callback_data: `monsters.filter.type.skills.hits.${skill.toLowerCase()}`
     }));
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.hits}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.skills.hits}`, {
         reply_markup: {
             inline_keyboard: [
                 buildKeyboard(["0", "1", "2"]),

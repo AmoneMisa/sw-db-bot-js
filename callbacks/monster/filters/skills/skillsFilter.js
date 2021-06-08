@@ -1,4 +1,5 @@
 const dictionary = require('../../../../dictionaries/main');
+const buttonsDictionary = require('../../../../dictionaries/buttons');
 const sendMessage = require('../../../../functions/sendMessage');
 const deleteMessage = require('../../../../functions/deleteMessage');
 
@@ -11,18 +12,18 @@ module.exports = [["monsters.filter.type.skills", function (session, callback) {
     }));
 
     let buttons = [[
-        ["Slot", "slot"],
-        ["Cooltime", "cooltime"],
-        ["Hits", "hits"]
+        [buttonsDictionary[session.language.buttons].slot, "slot"],
+        [buttonsDictionary[session.language.buttons].cooltime, "cooltime"],
+        [buttonsDictionary[session.language.buttons].hits, "hits"]
     ], [
-        ["Passive", "passive"],
-        ["Aoe", "aoe"]
+        [buttonsDictionary[session.language.buttons].passive, "passive"],
+        [buttonsDictionary[session.language.buttons].aoe, "aoe"]
     ], [
-        ["Scales with", "scales_with"],
-        ["Effects", "effects"]
+        [buttonsDictionary[session.language.buttons].scalesWith, "scales_with"],
+        [buttonsDictionary[session.language.buttons].effects, "effects"]
     ]].map(buildKeyboard);
 
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.skills.filter}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.skills.filter}`, {
         reply_markup: {
             inline_keyboard: buttons
         }

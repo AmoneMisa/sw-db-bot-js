@@ -5,7 +5,7 @@ const deleteMessage = require('../../../../functions/deleteMessage');
 
 module.exports = [["monsters.filter.type.stats.accuracy", function (session, callback) {
     deleteMessage(callback.message.chat.id, session.messages, callback.message.message_id);
-    sendMessage(session, callback.message.chat.id, `${dictionary[session.language].monsters.stats.accuracy}`, {
+    sendMessage(session, callback.message.chat.id, `${dictionary[session.language.text].monsters.stats.accuracy}`, {
         reply_markup: {
             inline_keyboard: [[{
                 text: "0",

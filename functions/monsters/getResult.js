@@ -2,6 +2,7 @@ const fetchMonsters = require('./fetch/fetchMonsters');
 const formatMonsterItem = require('./format/formatMonsterItem');
 const formatFilterString = require('./format/formatFilterString');
 const dictionary = require('../../dictionaries/main');
+const buttonsDictionary = require('../../dictionaries/buttons');
 
 module.exports = function (session) {
     session.page = session.page || 0;
@@ -13,11 +14,11 @@ module.exports = function (session) {
             let message = "";
 
             if (Object.keys(session.filter).length) {
-               message += `${dictionary[session.language].updateFilter}${formatFilterString(session.filter, session.language)}\n\n`;
+               message += `${dictionary[session.language.text].updateFilter}${formatFilterString(session.filter, session.language.text)}\n\n`;
             }
 
             if (r.data.totalElements === 0) {
-                message += `${dictionary[session.language].getResult}`;
+                message += `${dictionary[session.language.text].getResult}`;
             } else {
                 for (let monster of r.data.content) {
                     message += formatMonsterItem(monster) + "\n";
@@ -28,14 +29,14 @@ module.exports = function (session) {
 
             if (!r.data.first) {
                 buttons.push({
-                    text: "Prev page",
+                    text: buttonsDictionary[session.language.buttons].prevPage,
                     callback_data: "monsters.prev_page"
                 });
             }
 
             if (!r.data.last) {
                 buttons.push({
-                    text: "Next page",
+                    text: buttonsDictionary[session.language.buttons].nextPage,
                     callback_data: "monsters.next_page"
                 });
             }
@@ -43,16 +44,16 @@ module.exports = function (session) {
             let form = {
                 reply_markup: {
                     inline_keyboard: [buttons, [{
-                        text: "Select",
+                        text: buttonsDictionary[session.language.buttons].select,
                         callback_data: "monsters.by_id"
                     }], [{
-                        text: "Sort",
+                        text: buttonsDictionary[session.language.buttons].sort,
                         callback_data: "monsters.result.sort"
                     }], [{
-                        text: "Filter",
+                        text: buttonsDictionary[session.language.buttons].filter,
                         callback_data: "monsters.filter"
                     }, {
-                        text: "Help",
+                        text: buttonsDictionary[session.language.buttons].help,
                         callback_data: "monsters.help"
                     }]]
                 }

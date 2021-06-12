@@ -20,8 +20,8 @@ module.exports = {
                 "[ Stats ] || [ Статы ] - reset all stats.\n" +
                 "[ Skills ] || [ Скиллы ] - reset all skills. \n\n" +
                 "You can use some filters at the same time switching by buttons\n" +
-                "!Important filter [ Name ] || [ Название ] must have only one value. The search is performed by an exact match. \n" +
-                "If there is a typo, it will not find anything.\n" +
+                "!Important filter [ Name ] || [ Название ] must have only one value. The search is performed by an substring match. \n" +
+                "If you enter the name of the mob, its awakened versions will also be displayed.\n" +
                 "You must enter name only in > English <.\n" +
                 "You can enter with a small or capital letter, or a caps.\n\n" +
                 "The output of several monsters is displayed as: Name (or family name), base stars, element.\n" +
@@ -139,8 +139,8 @@ module.exports = {
                 "[ Stats ] || [ Статы ] - сбросит все статы.\n" +
                 "[ Skills ] || [ Скиллы ] - все скиллы. \n\n" +
                 "Вы можете использовать одновременно несколько фильтров, переключаясь по кнопкам. \n" +
-                "!Важно Фильтр [ Name ] || [ Название ] может содержать только одно значение. Поиск осуществляется точным совпадением. \n" +
-                "В случае, если будет допущена опечатка - ничего не найдёт.\n" +
+                "!Важно Фильтр [ Name ] || [ Название ] может содержать только одно значение. Поиск осуществляется совпадением подстроки.\n" +
+                "Если вы вводите название моба, вам так же будут выведены его пробуждённые версии.\n" +
                 "Вводить имя или название нужно\n" +
                 "> только на английском языке <.\n" +
                 "Вводить можно с маленькой или большой буквы, или капсом. \n\n" +

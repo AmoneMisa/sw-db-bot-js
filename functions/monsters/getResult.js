@@ -9,7 +9,7 @@ module.exports = function (session) {
     session.sortBy = session.sortBy || undefined;
     session.sortAsc = session.sortAsc || undefined;
 
-    return fetchMonsters({...session.filter, source: true}, session.page, session.sortBy, session.sortAsc)
+    return fetchMonsters({...session.filter}, session.page, session.sortBy, session.sortAsc)
         .then(r => {
             let message = "";
 

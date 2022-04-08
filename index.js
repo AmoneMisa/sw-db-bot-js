@@ -56,7 +56,7 @@ bot.on('message', (msg) => {
     }
 
     session.messages.push(msg.message_id);
-    console.log(session);
+    // console.log(session);
 });
 
 bot.on("callback_query", (callback) => {
@@ -71,7 +71,7 @@ bot.on("callback_query", (callback) => {
 
     Promise.all(results).then(() => {
         bot.answerCallbackQuery(callback.id);
-        console.log(session);
+        // console.log(session);
     });
 });
 
